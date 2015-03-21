@@ -1,0 +1,97 @@
+.TH EEEPGET 1 "February 5, 2014" "" "Eepget - I2P Downloader"
+
+.SH NAME
+Eepget \- I2P downloader
+
+.SH SYNOPSIS
+.B eepget
+.RI [ options ] URL
+.br
+
+.SH DESCRIPTION
+.P
+Download a file non-interactively via HTTP. Transfers through both I2P and the
+regular Internet are supported.
+.P
+Eepget is able to cope with slow or unstable network connections; if a download
+is not successful because of a network problem, it will keep retrying until the
+whole file has been retrieved (by default up to three times).  If supported by
+the remote server, eepget will instruct the server to continue the download
+from the point of interruption.
+
+.SH OPTIONS
+.B
+\fB\-c\fR
+.TP
+Clearnet. Do not use a proxy. Same as \fB\-p\fR :0 .
+.TP
+
+.B
+\fB\-e\fR etag
+.TP
+Sets the etag value in the request headers.
+.TP
+
+.B
+\fB\-h\fR name=value
+.TP
+Adds an arbitrary request header with the given name and value.
+.TP
+
+.B
+\fB\-l\fR lineLen
+.TP
+Controls the progress display. \fB\ lineLen \fP is the length of one progress line in characters. The default is 40.
+.TP
+
+.B
+\fB\-m\fR markSize
+.TP
+Controls the progress display. \fB\ markSize \fP is the number of bytes one '#' character represents. The default is 1024.
+.TP
+
+.B
+\fB\-n\fR retries
+.TP
+Specify the number of times to retry downloading if the download isn't successful. If this option is not specified, eepget will retry downloading the file 5 times.
+.TP
+
+.B
+\fB\-o\fR file
+.TP
+Sets the output file to write to. If this option is not given, the output filename will be determined by the URL.
+.TP
+
+.B
+\fB\-p\fR proxy_host[:port]
+.TP
+Specify an I2P proxy server (eeproxy) to use. If the port is not specified, eepget will use 4444. If this option is not specified, eepget will use 127.0.0.1:4444. Specify \fB\-c\fR or \fB\-p\fR :0 to disable the eeproxy.
+.TP
+
+.B
+\fB\-t\fR seconds
+.TP
+Sets the inactivity timeout. The default is 60 seconds.
+.TP
+
+.B
+\fB\-u\fR username
+.TP
+Sets the username for proxy authorization, if required.
+.TP
+
+.B
+\fB\-x\fR password
+.TP
+Sets the password for proxy authorization, if required. If a username is specified but not a password, EepGet will prompt for the password.
+.TP
+
+.SH EXIT STATUS
+
+.B eepget
+exits with status zero upon successful transfer and non-zero if there were problems with the download.
+
+.SH "SEE ALSO"
+
+curl(1) wget(1)
+

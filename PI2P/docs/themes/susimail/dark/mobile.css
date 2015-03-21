@@ -1,0 +1,17 @@
+#mailbox tr, #mailbox td {
+     display: block;
+}
+
+#mailbox th {
+     position: absolute;
+     top: -9999px;
+     left: -9999px;
+}
+
+#mailbox .optbox {
+     float: left;
+}
+
+div.header, div.footer {
+     display: none;
+}

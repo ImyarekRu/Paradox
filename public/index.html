@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="__("lang")"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="__("lang")"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="__("lang")"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="__("lang")"  style="height:100%;"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA" content="IE=Edge" />
+	<!-- Set the viewport width to device width for mobile -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>Paradox</title>
+	<link rel="stylesheet" href="assets/foundation/css/foundation.css">
+	<script src="assets/foundation/js/vendor/modernizr.js"></script>
+	<!--<link rel="stylesheet" href="assets/foundation/stylesheets/app.css">-->
+	
+   
+	<link rel="stylesheet" type="text/css" href="assets/FullScreenBookBlock/css/jquery.jscrollpane.custom.css" />
+	<link rel="stylesheet" type="text/css" href="assets/FullScreenBookBlock/css/bookblock.css" />
+	<link rel="stylesheet" type="text/css" href="assets/FullScreenBookBlock/css/custom.css" />
+	<script src="assets/FullScreenBookBlock/js/modernizr.custom.79639.js"></script>
+	<!--<script src="assets/foundation/javascripts/modernizr.foundation.js"></script>-->
+	<script type="text/javascript">
+		document.writeln("\<script type=\"text\/javascript\" src=\"\/\/"+document.location.hostname+":"+document.location.port+"\/socket.io\/socket.io.js\" \>\<\/script\>");
+		document.writeln("\<script type=\"text\/javascript\" src=\"\/\/"+document.location.hostname+":"+(parseInt(document.location.port)+1)+"\/socket.io\/socket.io.js\" \>\<\/script\>");
+	</script>
+
+
+
+<style type="text/css">
+/* reset-min.css */
+html{color:#000;background:#F6F6F6;}body,div,dl,dt,dd,ul,ol,li,/*h1,h2,h3,h4,h5,h6,*/pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:normal;} .content li {list-style:none;}caption,th{text-align:left;}/*h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}*/q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+/* Global */
+html, body { height: 100%; background:#F6F6F6;}
+.tabs dd > a { background:#F6F6F6;}
+body { font-family: FontAwesome, sans-serif; }
+#error { display: none; color: #d00; }
+
+.state0{
+	border:4px solid lightGrey;
+	width: 20px; 
+	height: 20px; 
+	background: transparent; 
+	-moz-border-radius: 50%; 
+	-webkit-border-radius: 50%; 
+	border-radius: 50%;
+	float:left;
+	cursor:pointer;
+	content: "";
+	animation: pulse 1s infinite linear;
+	-webkit-animation: pulse 1s infinite linear;
+}
+
+.state1:after {
+	border-width: 0 3px 0 0;
+	border-style: solid;
+	border-color: rgba(0, 0, 0, .5);
+	border-radius: 50%;
+	display: block;
+	height: 20px;
+	/*left: 50%;
+	margin: -25px 0 0 -25px;
+	position: absolute;
+	top: 50%;*/
+	width: 20px;
+	float:left;
+	cursor:pointer;
+	content: "";
+
+	animation: spin 1s infinite linear;
+	-webkit-animation: spin 1s infinite linear;
+}
+.state2:after {
+	width: 20px; 
+	height: 20px; 
+	background: green; 
+	-moz-border-radius: 50%; 
+	-webkit-border-radius: 50%; 
+	border-radius: 50%;
+	float:left;
+	cursor:pointer;
+	content: "";
+
+	animation: pulse 1s infinite linear;
+	-webkit-animation: pulse 1s infinite linear;
+}
+@keyframes spin {
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+	from { -webkit-transform: rotate(0deg); }
+	to { -webkit-transform: rotate(360deg); }
+}
+@keyframes pulse {
+	from { transform: scale(.85); }
+	50% { transform: scale(1); }
+	to { transform: scale(.85);}
+	
+}
+@-webkit-keyframes pulse {
+	from { transform: scale(.85); }
+	50% { transform: scale(1); }
+	to { transform: scale(.85);}
+}
+
+.bold{
+	font-weight:700;
+}
+.red{
+	 color:red;
+}
+.blue{
+	color:blue;
+}
+.green{
+	 color:green;
+}
+
+.hbut{
+	 margin:5px;padding: 3px 7px;border:1px solid Gray ;border-radius:5px;color:Gray ;
+}
+.hbut:hover{
+	 margin:5px;padding: 3px 7px;border:1px solid DimGray ;border-radius:5px;color:DimGray ;
+}
+.hbut.red{
+	 margin:5px;padding: 3px 7px;border:1px solid red;border-radius:5px;color:red;
+}
+.hbut.red:hover{
+	 margin:5px;padding: 3px 7px;border:1px solid DarkRed;border-radius:5px;color:DarkRed;
+}
+.hbut.green{
+	 margin:5px;padding: 3px 7px;border:1px solid green;border-radius:5px;color:green;
+}
+.hbut.green:hover{
+	 margin:5px;padding: 3px 7px;border:1px solid LimeGreen;border-radius:5px;color:LimeGreen;
+}
+.hbut.blue{
+	 margin:5px;padding: 3px 7px;border:1px solid blue;border-radius:5px;color:blue;
+}
+.hbut.blue:hover{
+	 margin:5px;padding: 3px 7px;border:1px solid skyblue;border-radius:5px;color:skyblue;
+}
+
+#back-top,#back-top_P {
+	position: fixed;
+	bottom: 0px;
+	right: 0px;
+	height:100%;
+}
+
+#back-top a,#back-top_P a {
+	width: 91px;
+	height: 100%;
+	display: none;
+	text-align: center;
+	border:0px none;
+	opacity:.5;
+	outline:none;
+	background:transparent;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+#back-top a:hover,#back-top_P a:hover {
+	color: #000;
+	border:0px none;
+	opacity:1;
+	background:#ddd;
+}
+
+/* arrow icon (span tag) */
+#back-top span,#back-top_P span {
+	width: 68px;
+	height: 68px;
+	display: block;
+	position:absolute;
+	top:45%;
+	right:10px;
+	
+	border:0px none;
+	margin-bottom: 7px;
+	background: #ddd url(assets/images/up-arrow.png) no-repeat center center;
+
+	/* rounded corners */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+#back-top a:hover span {
+	background-color: #777;
+	border:0px none;
+}
+
+
+
+#newPostbut,#newPostbut_P {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	height:100px;
+}
+
+#newPostbut a,#newPostbut_P a {
+	width: 91px;
+	height: 100%;
+	display: block;
+	text-align: center;
+	border:0px none;
+	opacity:.5;
+	outline:none;
+	background:transparent;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+#newPostbut a:hover,#newPostbut_P a:hover {
+	color: #000;
+	border:0px none;
+	opacity:1;
+}
+
+/* arrow icon (span tag) */
+#newPostbut span,#newPostbut_P span {
+	width: 68px;
+	height: 68px;
+	display: block;
+	position:absolute;
+	top:0px;
+	left:10px;
+	
+	border:0px none;
+	margin-bottom: 7px;
+	background: #ddd url(assets/images/pencil.png) no-repeat center center;
+	background-size:contain;
+
+	/* rounded corners */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+#newPostbut a:hover span,#newPostbut_P a:hover span {
+	background-color: #ddd;
+	border:0px none;
+}
+
+
+
+
+
+
+
+
+
+
+
+a.pickfilebut,a.pickfilebut_P {
+	width: 91px;
+	height: 100%;
+	display: block;
+	text-align: center;
+	border:0px none;
+	opacity:.5;
+	outline:none;
+	background:transparent;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+a.pickfilebut:hover,a.pickfilebut_P:hover {
+	color: #000;
+	border:0px none;
+	opacity:1;
+}
+
+/* arrow icon (span tag) */
+a.pickfilebut span,a.pickfilebut_P span {
+	width: 48px;
+	height: 48px;
+	display: block;
+	top:0px;
+	left:10px;
+	
+	border:0px none;
+	margin-bottom: 7px;
+	background: #ddd url(assets/images/pencil.png) no-repeat center center;
+	background-size:contain;
+
+	/* rounded corners */
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+	/* transition */
+	-webkit-transition: .5s;
+	-moz-transition: .5s;
+	transition: .5s;
+}
+a.pickfilebut:hover span,a.pickfilebut_P:hover span {
+	background-color: #ddd;
+	border:0px none;
+}
+
+.f-dropdown{
+	width:auto;
+};
+.f-dropdown li a{
+	font-size:.7rem;
+	padding: 0.2rem;
+};
+.block,.unblock,.read,.follow,.unfollow,.chat,.close{
+	padding: 0.2rem;
+};
+
+
+
+
+
+
+
+
+
+
+
+#UploadBox,#UploadBox_P,#UploadBox2Tab,#UploadBox2Tab_P {
+	background: transparent;
+	width: 400px;
+}
+.DirectoryArea,.DirectoryArea2Tab,.DirectoryAreaNewPost,.DirectoryArea_P,.DirectoryArea2Tab_P,.DirectoryAreaNewPost_P {
+	background: #FFF;
+	height: 154px;
+	width: auto;
+	border: 1px solid #DFDFDF;
+	overflow:auto;
+	font-size:10px;
+	
+}
+/*
+#LinkArea,#LinkArea_P {
+	display:none;
+	position:relative;
+	margin-top:30%;
+	padding:5px;
+	background: #FFF;
+	height: 40px;
+	width: 100%;
+	border: 1px solid #DFDFDF;
+	overflow:auto;
+	font-size:14px;
+	-webkit-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);
+
+	-webkit-border-radius: 11px;
+	-moz-border-radius: 11px;
+	border-radius: 5px;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+/* ############readcomments######### */
+.toggle-box {
+  display: none;
+  float:right;
+  -moz-transition:all 2s ease;
+}
+
+.toggle-box + label {
+-moz-transition:all 2s ease;
+  cursor: pointer;
+  display: block;
+  float:right;
+  font-weight: bold;
+  line-height: 21px;
+  margin-bottom: 5px;
+}
+
+.toggle-box + label + div {
+	-moz-transition:all 2s ease;
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div {
+	-moz-transition:all 2s ease;
+  display: block;
+}
+
+.toggle-box + label:before {
+-moz-transition:all 2s ease;
+  background-color: #4F5150;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  content: "+";
+  display: block;
+  float: left;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 5px;
+  text-align: center;
+  width: 20px;
+}
+
+.toggle-box:checked + label:before {
+-moz-transition:all 2s ease;
+  content: "\2212";
+} 
+
+
+/*
+div.hallotoolbar {
+border: 1px solid #babdb6;
+padding: 2px;
+background-color: #eeeeec;
+border-radius: 6px;
+font-size: 12pt;
+line-height: 1.1em;
+width: 260px;
+z-index: 500;
+}
+div.hallotoolbar .dropdown-menu {
+width: "200px";
+background-color: #eeeeec;
+margin-top: -1px;
+border-left: 1px solid #babdb6;
+border-bottom: 1px solid #babdb6;
+border-right: 1px solid #babdb6;
+border-bottom-left-radius: 6px;
+border-bottom-right-radius: 6px;
+}
+div.hallotoolbar .dropdown-menu .selected {
+background-color: #729fcf;
+} 
+.hallotoolbar{z-index:9999999999999}
+*/
+</style>
+	
+<link rel="stylesheet" type="text/css" href="assets/genericons/genericons.css" />	
+<link rel="stylesheet" href="../assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="assets/jquery-ui/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="assets/markitup/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="assets/markitup/markitup/sets/markdown/style.css" />
+</head>
+
+<body id="top">
+<div id="container" class="container">
+
+
+	<div class="bb-custom-wrapper">
+		<div id="bb-bookblock" class="bb-bookblock">
+			<div class="bb-item" id="item1">
+				
+				
+				
+				
+			
+			
+			
+			
+			
+			
+				<!--   PUBLIC PAGE  -->
+				<div class="off-canvas-wrap" data-offcanvas> 
+					<div class="inner-wrap"> 
+						<nav class="tab-bar" > 
+							<section class="left" style="margin-right:10px;"> <a class="left-off-canvas-toggle /*menu-icon*/" href="#" style="outline:none;"><h1 class="title">&nbsp;&nbsp;__("Peers")&nbsp;&nbsp;</h1></a> </section> 
+							<section class="middle tab-bar-section" style="min-width: 830px;"> 
+								<h1 class="title" onclick="$('#HomeH_P').click();" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Posts")&nbsp;&nbsp;</h1>
+								<h1 class="title" onclick="$('#ChatsTabH_P').click();$('.chatscnt').removeClass('bold');" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Msgs") (<span class="chatscnt_P">0</span>)&nbsp;&nbsp;</h1>
+								<h1 class="title" onclick="$('#UploadTabH_P').click();" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Files")&nbsp;&nbsp;</h1>
+								<h1 class="title"  style="display:inline-block;margin-left:10%;">&nbsp;&nbsp;<a href="#" data-reveal-id="newPost_P" class="hbut green" onclick="CreateEpicEdit('new_post_text_P',-1,-1,'');"><b>__("New Post")</b></a>&nbsp;&nbsp;</h1>
+								<h1 class="title" style="display:inline-block;"> __("in") Paradox</h1>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span id="bb-nav-next" class="menu-button">__("publicly")</span>
+								<h1 class="title" style="position:fixed;bottom:0;left:44px;z-index:9999999;cursor:pointer;background:rgba(0,0,0,.5);"><a href="#top" class="backtotop backtotop_P" style="color:#fff;display:none;outline:none;" >&nbsp;&nbsp;[__("top")]&nbsp;&nbsp;</a></h1>
+								</section> 
+							<section class="right-small"> <a class="right-off-canvas-toggle menu-icon" href="#" style="outline:none;"><span></span></a> </section> 
+						</nav> 
+						<aside class="left-off-canvas-menu"> 
+							<div id="Knownapp_P">
+								<dl class="sub-nav" id="PeersFilter_P">
+									<dd id="all" class="active"><span onclick="FilterPeers('th', event,$(this),'all');" style="cursor:pointer;">__("All")</span></dd> 
+									<dd id="i"><span onclick="FilterPeers('th', event,$(this),'i');" style="cursor:pointer;">__("Ifollow")</span></dd> 
+									<dd id="me"><span onclick="FilterPeers('th', event,$(this),'me');" style="cursor:pointer;">__("followMe")</span></dd> 
+									<dd id="b"><span onclick="FilterPeers('th', event,$(this),'b');" style="cursor:pointer;">__("Blck")</span></dd> 
+								</dl>
+								<div>
+									<input type="text" id="searchpeers_P" placeholder="__("Search...")" onkeyup="console.log('keyup');var value=$(this).val();if(value.length>0){SearchKnownPeer_P(value);}else{SearchKnownPeer_P(null);};return false;" />
+								</div>
+								<section id="Knownmain_P">
+									<ul class="small-12 columns" id="Known_P-list" style="padding:0;text-align:left;background:#333;" ></ul>
+								</section>
+							</div>
+						</aside> 
+						<aside class="right-off-canvas-menu"> 
+							<ul class="off-canvas-list"> 
+								<li><label>__("Tools")</label></li> 
+								<li id="start_th"></li>
+								<li><a href="#" onclick="$('#MyProfileH_P').click();">__("Profile")</a></li> 
+								<li><a href="#" onclick="$('#SettingsTabH_P').click();">__("Sets")</a></li> 
+								<li><a href="#" onclick="$('#LogsH_P').click();">__("Logs")</a></li> 
+								<li><a href="#" onclick="$('#AboutH_P').click();">__("About")</a></li> 
+							</ul> 
+						</aside> 
+						<section class="main-section_P" style="height:100%;"> 
+							<!-- content goes here -->
+							<div class="small-12 columns" id="main-section_P" style="overflow-x:hidden;overflow-y:auto;max-height:50px;">
+								<dl class="tabs" data-tab style="max-height:1px;visibility:hidden;"> 
+									<dd class="active"><a href="#Home_P" id="HomeH_P">__("Posts")</a></dd> 
+									<dd><a href="#ChatsTab_P" id="ChatsTabH_P" onclick="$('.chatscnt_P').removeClass('bold');">__("Msgs")</a></dd> 
+									<dd><a href="#SettingsTab_P" id="SettingsTabH_P" >__("Sets")</a></dd> 
+									<dd><a href="#UploadTab_P" id="UploadTabH_P">__("Files")</a></dd> 
+									<dd style="float:right;"><a href="#AboutTab_P" id="AboutH_P">__("About")</a></dd> 
+									<dd style="float:right;"><a href="#LogsTab_P" id="LogsH_P">__("Logs")</a></dd> 
+									<dd style="float:right;"><a href="#MyProfile_P" id="MyProfileH_P">__("Profile")</a></dd> 
+								</dl> 
+								<div class="tabs-content"> 
+									<div class="small-12 columns content active" id="Home_P">
+										<div class="small-12 columns" id="PostsTab_P">
+											<div class="sunheader" style="width:100%;text-align:center;margin-top:-20px;">__("Posts")</div>
+											<dl class="sub-nav" data-tab>
+												<dd><a href="#AllPostsTab_P">__("All")</a></dd> 
+												<!--<dd><a href="#AllWebPostsTab_P">Все Web-посты</a></dd> -->
+												<dd><a href="#MyPostsTab_P">__("My")</a></dd> 
+												<!--<dd><a href="#MyWebPostsTab_P">Мои Web-посты</a></dd> 
+												<dd class="active"><a href="#AlertsPostsTab_P">__("Alerts")</a></dd>-->
+											</dl> 
+											<div class="tabs-content"> 
+												<div class="content" id="AllPostsTab_P" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="AllPost_P">
+															<div id="AllPostapp_P">
+																<section id="AllPostmain_P">
+																	<ul class="" id="AllPost_P-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+												<!--<div class="content" id="AllWebPostsTab_P" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="AllPost_P">
+															<div id="AllWebPostapp_P">
+																<section id="AllWebPostmain_P">
+																	<ul class="" id="AllWebPost_P-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>-->
+												<div class="content" id="MyPostsTab_P" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="MyPost_P">
+															<div id="MyPostapp_P">
+																<section id="MyPostmain_P">
+																	<ul class="" id="MyPost_P-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+												<!--<div class="content" id="MyWebPostsTab_P" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="MyPost_P">
+															<div id="MyWebPostapp_P">
+																<section id="MyWebPostmain_P">
+																	<ul class="" id="MyWebPost_P-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+												<div class="content active" id="AlertsPostsTab_P" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="AlertPost_P">
+															<div id="AlertPostapp_P">
+																<section id="AlertPostmain_P">
+								
+																	<ul class="" id="AlertPost_P-list" ></ul>
+																	
+																</section>
+															</div>
+														</div>
+												</div>-->
+											</div>
+										</div>
+									</div> 
+									<div class="content" id="ChatsTab_P" > 
+										<div class="small-12 columns" id="Chats_P">
+											<div class="sunheader" style="width:100%;text-align:center;margin-top:-20px;">__("Msgs")</div>
+											<div class="small-3 columns" id="ChatsPeers_P" style="height:300px;overflow-x:hidden;overflow-y:auto;">
+												<ul id="ChatPeers_P-list" ></ul>
+											</div>
+											<div class="small-9 columns" id="ChatsMsgs_P" >
+												<div class="small-12 columns" >
+													<div class="small-12 columns">
+														<h3 class="curChatNick_P" style="font-size:1.3rem;font-weight:700;"></h3>
+													</div>
+													<div class="small-12 columns">
+														<div id="ChatMsgs_P-list" class="ChatMsgs_P-list" style="min-height:1px;max-height:100px;overflow-x:hidden;overflow-y:auto;">
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<textarea class="small-10 columns" id="chatmsginput_P" style="display:none;padding:0;"></textarea>
+														<a href="#"  data-reveal-id="pickFile_P" id="pickFileB_P" class="small secondary button" onclick="$('#RefreshDirButton_P').click();" style="display:none;height:50px;"><span class="genericon genericon-attachment" style="width:auto;font-size:24px;"></span></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="content" id="UploadTab_P" style="padding:0;margin:0;"> 
+										<div class="small-6 columns">
+											<div id="UploadBox_P">
+												<h3  style="margin:0px;">__("Uploading")</h3>
+												<span id='UploadArea_P'>
+													<label for="FileBox_P">__("SelectFile"): </label><input type="file" id="FileBox_P"><br>
+													<label for="NameBox_P">__("RenameFile") (<small>__("OnlyLatCharsAndNums")</small>): </label><input type="text" id="NameBox_P" ><br>
+													<button	type='button' id='UploadButton_P' class='Button'>__("Upload")</button>
+												</span>
+											</div>
+										</div>
+										<div class="small-6 columns">
+											<div class="small-12 columns" >
+												<button	type='button' id='RefreshDirButton2Tab_P' class="small success button">__("UpdateFileList")</button><br>
+												<div class='DirectoryArea2Tab_P'></div>
+											</div>
+										</div>
+										<div class="small-12 columns link2file_P" ></div>
+									</div> 
+									
+									<div class="content" id="LogsTab_P"> 
+											<div class="small-12 columns" id="LOGS_P" style="padding:0;margin:0;">
+												<div id="loglineapp_P">
+													<section id="loglinemain_P">
+														<ul id="logline-list_P"></ul>
+													</section>
+												</div>
+											</div>
+									</div> 
+									<div class="content" id="MyProfile_P" style="padding:0;margin:0;"> 
+										<div class="small-12 columns" >
+											<div class="small-6 small-offset-3 columns" id="public_P" >
+												<div class="row">
+														<div class="small=12 columns" align="center"><h4>__("PublicData")</h4><h5 class="subheader">__("PublicDataWarn")</h5><hr></div>
+														<div class="small-6 columns">
+															<label>__("YourNick"):</label>
+															<input id="nick_P" type="text" placeholder="__("YourNick")" maxlength=20 style="width:100%;" ></input>
+														</div>
+														<div class="small-6 columns">
+															<label>__("YourMail"):</label>
+															<input id="mail_P" type="text" placeholder="__("YourMailPH")" maxlength=300 ></input>
+														</div>
+														<div class="small-12 columns">
+															<label>__("AbtYou"):</label>
+															<textarea id="desc_P" placeholder="__("AbtYouPH")" rows=4 style="width:100%;padding: 0.4em;"></textarea>
+														</div>
+												</div>
+											</div>
+											<div class="small-12 columns" align="center">
+												<br><br>
+												<button	class='button' onclick="updateProfile('th');">__("Update")</button>
+											</div>
+										</div>
+									</div> 
+									<div class="content" id="SettingsTab_P" style="padding:0;margin:0;"> 
+										<div class="small-12 columns">
+											<form data-abide class="small-6 small-offset-3 columns" style="min-width: 600px;">
+												<div class="small-12 columns">
+													<div class="small-12 columns" >
+														__("NotWorkingSets")
+														<div class="small-9 columns" >
+															<br>
+															__("Set1")&nbsp;
+														</div>
+														<div class="small-3 columns" >
+															<label for="cnctondem_P0" class="inline" style="display:inline-block;margin: 6px 0 0;">__("No")
+																<input type="radio" name="cnctondem_P" id="cnctondem_P0" value="0" onclick="$('#maxoutcnctsdiv_P').show('slow');" />
+															</label>&nbsp;&nbsp;&nbsp;<label for="cnctondem_P1" class="inline" style="display:inline-block;margin:0;">__("Yes")
+																<input type="radio" name="cnctondem_P" id="cnctondem_P1" value="1" onclick="$('#maxoutcnctsdiv_P').hide('slow');" />
+															</label>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxoutcnctsdiv_P" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set2")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxoutcncts_P" style="background-image:none;outline:none;"  >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set3")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<label for="autofetch_P0" class="inline" style="display:inline-block;margin: 6px 0 0;">__("No")
+																<input type="radio" name="autofetch_P" id="autofetch_P0" value="0" onclick="$('#maxautofetchdiv_P').hide('slow');" />
+															</label>&nbsp;&nbsp;&nbsp;<label for="autofetch_P1" class="inline" style="display:inline-block;margin:0;">__("Yes")
+																<input type="radio" name="autofetch_P" id="autofetch_P1" value="1" onclick="$('#maxautofetchdiv_P').show('slow');" />
+															</label>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxautofetchdiv_P" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set4")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxautofetch_P" style="background-image:none;outline:none;"  >
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxlastestpostsdiv_P" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set5")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxlastestposts_P" style="background-image:none;outline:none;">
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set6")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxincncts_P" style="background-image:none;outline:none;" >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set7")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxknowns_P" style="background-image:none;outline:none;" >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns" align="center" style="display:none;">
+														<br>
+														<button	id="submitConfig_P" onclick="UpdateConfig_P();"></button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div> 
+									<div class="content" id="AboutTab_P" style="padding:0;margin:0;"> 
+										<div class="small-12 columns" >
+											<div class="small-8 small-offset-2 columns">
+												<div class="row">
+													<div class="small=12 columns" align="center"><h4>__("About").</h4><h5 class="subheader">__("AbtPageVer"): 0.001</h5><hr></div>
+													<div class="small-12 columns"  style="text-indent: 1.5em;">
+														__("AboutProjectText")
+														
+													</div>
+												</div>
+											</div>
+										</div>
+									</div> 
+								</div>
+							</div>
+						</section> 
+						<a class="exit-off-canvas" onclick="return true;"></a>
+					</div> 
+				</div>
+
+
+
+
+					
+					
+					
+					
+				<div id="infoPanel_P"  style="width:auto;"><div class="lead txt"></div></div>	
+				<div id="infoModal_P" class="small reveal-modal" style="width:auto;" data-reveal><div class="lead txt"></div><a class="close-reveal-modal">&#215;</a></div>	
+				<div id="peersPosts_P" class="reveal-modal" data-reveal >
+					<div class="small-12 columns" id="PeersPosts_P" style="height:300px;padding:0;">
+						<div id="PeersPostsapp_P" style="width:98%;height:300px;overflow-y:auto;overflow-x:hidden;display: inline-block;">
+							<section id="PeersPostsmain_P" >
+								<ul class="" id="PeersPosts_P-list" ></ul>
+							</section>
+						</div>
+					</div>
+					<a class="close-reveal-modal">&#215;</a>
+				</div>	
+				<div id="newPost_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns">
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<textarea id="new_post_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="newpost_P">__("PostIt")</button>
+						<!--<button  data-reveal-id="pickFileNewPost_P" id="pickFileNewPostB_P" class="small secondary button" onclick="$('#RefreshDirButtonNewPost_P').click();" style="/*display:inline-flex;*/height:56px;"><span class="genericon genericon-attachment" style="width:auto;font-size:24px;"></span></button>-->
+					</div>
+					<a class="close-reveal-modal" id="close_newPost_P">&#215;</a>
+				</div>	
+				<div id="cmnt2mypostPost_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("AddComment"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<input type="hidden" id="cmnt2mypostPostID_P" value="" />
+						<textarea id="cmnt2mypost_post_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmnt2mypost_P">__("PostIt")</button>
+					</div>
+					<a class="close-reveal-modal" id="close_cmnt2mypostPost_P">&#215;</a>
+				</div>
+				<div id="cmnt2mywebpostPost_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("AddComment"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<input type="hidden" id="cmnt2mywebpostPostID_P" value="" />
+						<textarea id="cmnt2mywebpost_post_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmnt2mywebpost_P">__("PostIt")</button>
+					</div>
+					<a class="close-reveal-modal" id="close_cmnt2mywebpostPost_P">&#215;</a>
+				</div>
+				<div id="cmntPost_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("AddComment"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<input type="hidden" id="cmntPostID_P" value="" />
+						<input type="hidden" id="cmntPostDest_P" value="" />
+						<textarea id="cmnt_post_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmntpost_P">__("PostIt")</button>
+					</div>
+					<a class="close-reveal-modal" id="close_cmntPost_P">&#215;</a>
+				</div>
+				<div id="editPost_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("EditPost"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<input type="hidden" id="editPostID_P" value="" />
+						<textarea id="edit_post_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="editpost_P">__("UpdatePost")</button>
+						<br>
+					</div>
+					<a class="close-reveal-modal" id="close_editPost_P">&#215;</a>
+				</div>
+				<div id="cmntPostweb_P" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("AddComment"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("MarkdownMan")</a><br><br>
+						<input type="hidden" id="cmntwebPostID_P" value="" />
+						<input type="hidden" id="cmntwebPostDest_P" value="" />
+						<textarea id="cmnt_webpost_text_P" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmntwebpost_P">__("PostIt")</button>
+					</div>
+					<a class="close-reveal-modal" id="close_cmntwebPost_P">&#215;</a>
+				</div>
+				
+				<div id="pickFile_P" class="reveal-modal " data-reveal >
+					<div class="row">
+						<br>
+						<div class="small-6 columns panel" >
+							<input type="hidden" id="NickBoxW_P" />
+							<button	type='button' id='RefreshDirButtonW_P' class="small success button">__("UpdateLib")</button><br>
+							<div class='DirectoryAreaW_P' style="height:auto;overflox-y:auto;max-width:50%;"></div>
+						</div>
+					<!--</div>
+					<div class="row">-->
+						<div class="small-6 columns panel"  id="UPLOAD_P">
+							<div id="UploadBoxW_P">
+								<h6  style="margin:0px;"><b>__("UploadIntoLocalLib")</b></h6>
+								<br>
+								<span id='UploadAreaW_P'>
+									<label for="FileBoxW_P">__("SelectFile"): </label><input type="file" class="success button" id="FileBoxW_P"><br>
+									<label for="NameBoxW_P">__("RenameFile") (<small>__("OnlyLatCharsAndNums")</small>): </label><input type="text" id="NameBoxW_P" ><br>
+									<button	type='button' id='UploadButtonW_P' class='Button'>__("Upload")</button>
+								</span>
+							</div>
+						</div>
+						<div class="small-12 columns link2fileW_P" ></div>
+					</div>
+					<a class="close-reveal-modal" id="close_PickFile_P">&#215;</a>
+				</div>
+				
+			
+			
+				
+				
+				
+				
+			</div>
+			
+			<div class="bb-item" id="item2">
+			
+			
+			
+			
+			
+			
+			
+			
+				<!--   ANONYMOUS PAGE  -->
+				<div class="off-canvas-wrap" data-offcanvas> 
+					<div class="inner-wrap"> 
+						<nav class="tab-bar" > 
+							<section class="left" style="margin-right:10px;"> <a class="left-off-canvas-toggle /*menu-icon*/" href="#" style="outline:none;"><h1 class="title">&nbsp;&nbsp;__("Peers")&nbsp;&nbsp;</h1></a> </section> 
+							<section class="middle tab-bar-section" style="min-width: 740px;"> 
+								<h1 class="title" onclick="$('#HomeH').click();" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Posts")&nbsp;&nbsp;</h1>
+								<h1 class="title" onclick="$('#ChatsTabH').click();$('.chatscnt').removeClass('bold');" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Msgs") (<span class="chatscnt">0</span>)&nbsp;&nbsp;</h1>
+								<h1 class="title" onclick="$('#UploadTabH').click();" style="display:inline-block;cursor:pointer;">&nbsp;&nbsp;__("Files")&nbsp;&nbsp;</h1>
+								<h1 class="title"  style="display:inline-block;margin-left:10%;">&nbsp;&nbsp;<a href="#" data-reveal-id="newPost" class="hbut green" onclick="CreateEpicEdit('new_post_text',-1,-1,'');"><b>__("New Post")</b></a>&nbsp;&nbsp;</h1>
+								<h1 class="title" style="display:inline-block;"> __("in") Paradox</h1>&nbsp;&nbsp;&nbsp;&nbsp;
+								<span id="bb-nav-prev"  class="menu-button">анонимно</span>
+								<!--<h1 class="title" style="display:inline-block;margin-left:150px;"><a href="#top" class="backtotop" style="color:#fff;display:none;outline:none;" >&nbsp;&nbsp;&nbsp;&nbsp;[наверх]</a></h1>
+								
+								<h1 class="title"  style="display:inline-block;margin-left:1%;">&nbsp;&nbsp;<a href="#" data-reveal-id="newPost_P" class="hbut green" onclick="CreateEpicEdit('new_post_text_P',-1,-1,'');"><b>Новый Пост</b></a>&nbsp;&nbsp;</h1>
+								<h1 class="title" style="display:inline-block;"> в ws</h1>-->
+								<h1 class="title" style="position:fixed;bottom:0;left:44px;z-index:9999999;cursor:pointer;background:rgba(0,0,0,.5);"><a href="#top" class="backtotop" style="color:#fff;display:none;outline:none;" >&nbsp;&nbsp;[__("top")]&nbsp;&nbsp;</a></h1>
+								
+								</section> 
+							<section class="right-small"> <a class="right-off-canvas-toggle menu-icon" href="#" style="outline:none;"><span></span></a> </section> 
+						</nav> 
+						<aside class="left-off-canvas-menu"> 
+							<div id="Knownapp">
+								<dl class="sub-nav" id="PeersFilter">
+									<dd id="all" class="active"><span onclick="FilterPeers('i2p', event,$(this),'all');" style="cursor:pointer;">__("All")</span></dd> 
+									<dd id="i"><span onclick="FilterPeers('i2p', event,$(this),'i');" style="cursor:pointer;">__("I+")</span></dd> 
+									<dd id="me"><span onclick="FilterPeers('i2p', event,$(this),'me');" style="cursor:pointer;">__("+Me")</span></dd> 
+									<dd id="b"><span onclick="FilterPeers('i2p', event,$(this),'b');" style="cursor:pointer;">__("Blck")</span></dd> 
+								</dl>
+								<div>
+									<input type="text" id="searchpeers" placeholder="__("Search...")" onkeyup="var value=$(this).val();if(value.length>0){SearchKnownPeer(value);}else{SearchKnownPeer(null);};return false;" />
+								</div>
+								<section id="Knownmain">
+									<ul class="small-12 columns" id="Known-list" style="padding:0;text-align:left;background:#f0f0f0;" ></ul>
+								</section>
+							</div>
+						</aside> 
+						<aside class="right-off-canvas-menu"> 
+							<ul class="off-canvas-list"> 
+								<li><label>__("Tools")</label></li>
+								<li id="start_i2p"></li>
+								<li><a href="#" onclick="$('#MyProfileH').click();">__("Profile")</a></li> 
+								<li><a href="#" onclick="$('#SettingsTabH').click();">__("Sets")</a></li> 
+								<li><a href="#" onclick="$('#LogsH').click();">__("Logs")</a></li> 
+								<li><label>I2P</label></li>
+								<li><a href="http://127.0.0.1:7657/console" target="_blank">__("I2PHome")</a></li> 
+								<!--<li><a href="http://127.0.0.1:7657/susimail/susimail" target="_blank">Анонимная почта</a></li> 
+								<li><a href="http://127.0.0.1:7657/i2psnark/" target="_blank">Анонимные торренты</a></li> 
+								-->
+								<li><a href="#" onclick="$('#AboutH').click();"><label>__("About")</label></a></li> 
+							</ul> 
+						</aside> 
+						<section class="main-section" style="height:100%;background:#ddd"> 
+							<!-- content goes here -->
+							<div class="small-12 columns" id="main-section" style="overflow-x:hidden;overflow-y:auto;max-height:50px;">
+								<dl class="tabs" data-tab style="max-height:1px;visibility:hidden;"> 
+									<dd class="active"><a href="#Home" id="HomeH">__("Posts")</a></dd> 
+									<dd><a href="#ChatsTab" id="ChatsTabH" onclick="$('.chatscnt').removeClass('bold');">__("Msgs")</a></dd> 
+									<dd><a href="#SettingsTab" id="SettingsTabH" >__("Sets")</a></dd> 
+									<dd><a href="#UploadTab" id="UploadTabH">__("Files")</a></dd> 
+									<dd style="float:right;"><a href="#AboutTab" id="AboutH">__("About")</a></dd> 
+									<dd style="float:right;"><a href="#LogsTab" id="LogsH">__("Logs")</a></dd> 
+									<dd style="float:right;"><a href="#MyProfile" id="MyProfileH">__("Profile")</a></dd> 
+								</dl> 
+								<div class="tabs-content"> 
+									<div class="small-12 columns content active" id="Home">
+										<div class="small-12 columns" id="PostsTab">
+											<div class="sunheader" style="width:100%;text-align:center;margin-top:-20px;">__("Posts")</div>
+											<dl class="sub-nav" data-tab>
+												<dd><a href="#AllPostsTab">__("All")</a></dd> 
+												<dd><a href="#MyPostsTab">__("My")</a></dd> 
+												<dd class="active"><a href="#AlertsPostsTab">__("Alerts")</a></dd>
+											</dl> 
+											<div class="tabs-content"> 
+												<div class="content" id="AllPostsTab" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="AllPost">
+															<div id="AllPostapp">
+																<section id="AllPostmain">
+																	<ul class="" id="AllPost-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+												<div class="content" id="MyPostsTab" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="MyPost">
+															<div id="MyPostapp">
+																<section id="MyPostmain">
+																	<ul class="" id="MyPost-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+												<div class="content active" id="AlertsPostsTab" style="padding:0;margin:0;"> 
+														<div class="small-12 columns" id="AllAlerts">
+															<div id="AlertPostapp">
+																<section id="AlertPostmain">
+																	<ul class="" id="AllAlerts-list" ></ul>
+																</section>
+															</div>
+														</div>
+												</div>
+											</div>
+										</div>
+									</div> 
+									<div class="content" id="ChatsTab" > 
+										<div class="small-12 columns" id="Chats">
+											<div class="sunheader" style="width:100%;text-align:center;margin-top:-20px;">__("Msgs")</div>
+											<div class="small-3 columns" id="ChatsPeers" style="height:300px;overflow-x:hidden;overflow-y:auto;">
+												<ul id="ChatPeers-list" ></ul>
+											</div>
+											<div class="small-9 columns" id="ChatsMsgs" >
+												<div class="small-12 columns" >
+													<div class="small-12 columns">
+														<h3 class="curChatNick" style="font-size:1.3rem;font-weight:700;"></h3>
+													</div>
+													<div class="small-12 columns">
+														<div id="ChatMsgs-list" class="ChatMsgs-list" style="min-height:1px;max-height:100px;overflow-x:hidden;overflow-y:auto;">
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<textarea class="small-10 columns" id="chatmsginput" style="display:none;padding:0;"></textarea>
+														<a href="#"  data-reveal-id="pickFile" id="pickFileB" class="small secondary button" onclick="$('#RefreshDirButton').click();" style="display:none;height:50px;"><span class="genericon genericon-attachment" style="width:auto;font-size:24px;"></span></a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="content" id="UploadTab" style="padding:0;margin:0;"> 
+										<div class="small-6 columns">
+											<div id="UploadBox">
+												<h3  style="margin:0px;">__("Uploading")</h3>
+												<span id='UploadArea'>
+													<label for="FileBox">__("SelectFile"): </label><input type="file" id="FileBox"><br>
+													<label for="NameBox">__("RenameFile") (<small>__("OnlyLatCharsAndNums")</small>): </label><input type="text" id="NameBox" ><br>
+													<button	type='button' id='UploadButton' class='Button'>__("Upload")</button>
+												</span>
+											</div>
+										</div>
+										<div class="small-6 columns">
+											<div class="small-12 columns" >
+												<button	type='button' id='RefreshDirButton2Tab' class="small success button">__("UpdateFileList")</button><br>
+												<div class='DirectoryArea2Tab'></div>
+											</div>
+										</div>
+										<div class="small-12 columns link2file" ></div>
+									</div> 
+									<div class="content" id="LogsTab"> 
+											<div class="small-12 columns" id="LOGS" style="padding:0;margin:0;">
+												<div id="loglineapp">
+													<section id="loglinemain">
+														<ul id="logline-list"></ul>
+													</section>
+												</div>
+											</div>
+									</div> 
+									<div class="content" id="MyProfile" style="padding:0;margin:0;"> 
+										<div class="small-12 columns" >
+											<div class="small-6 small-offset-3 columns" id="public" >
+												<div class="row">
+														<div class="small=12 columns" align="center"><h4>__("PublicData")</h4><h5 class="subheader">__("I2PPublicDataWarn")</h5><hr></div>
+														<div class="small-6 columns">
+															<label>__("YourNick"):</label>
+															<input id="nick" type="text" placeholder="__("YourNick")" maxlength=20 style="width:100%;" ></input>
+														</div>
+														<div class="small-6 columns">
+															<label>__("I2PYourMail"):</label>
+															<input id="mail" type="text" placeholder="__("I2PYourMailPH")" maxlength=300 ></input>
+														</div>
+														<div class="small-12 columns">
+															<label>__("AbtYou"):</label>
+															<textarea id="desc" placeholder="__("AbtYouPH")" rows=4 style="width:100%;padding: 0.4em;"></textarea>
+														</div>
+												</div>
+											</div>
+											<div class="small-12 columns" align="center">
+												<br><br>
+												<button	class='button' onclick="updateProfile('i2p');">__("Update")</button>
+											</div>
+										</div>
+									</div> 
+									<div class="content" id="SettingsTab" style="padding:0;margin:0;"> 
+										<div class="small-12 columns">
+											<form data-abide class="small-6 small-offset-3 columns" style="min-width: 600px;">
+												<div class="small-12 columns">
+													<div class="small-12 columns" >
+														__("NotWorkingSets")
+														<div class="small-9 columns" >
+															<br>
+															__("Set1")&nbsp;
+														</div>
+														<div class="small-3 columns" >
+															<label for="cnctondem0" class="inline" style="display:inline-block;margin: 6px 0 0;">__("No")
+																<input type="radio" name="cnctondem" id="cnctondem0" value="0" onclick="$('#maxoutcnctsdiv').show('slow');" />
+															</label>&nbsp;&nbsp;&nbsp;<label for="cnctondem1" class="inline" style="display:inline-block;margin:0;">__("Yes")
+																<input type="radio" name="cnctondem" id="cnctondem1" value="1" onclick="$('#maxoutcnctsdiv').hide('slow');" />
+															</label>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxoutcnctsdiv" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set2")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxoutcncts" style="background-image:none;outline:none;"  >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set3")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<label for="autofetch0" class="inline" style="display:inline-block;margin: 6px 0 0;">__("No")
+																<input type="radio" name="autofetch" id="autofetch0" value="0" onclick="$('#maxautofetchdiv').hide('slow');" />
+															</label>&nbsp;&nbsp;&nbsp;<label for="autofetch1" class="inline" style="display:inline-block;margin:0;">__("Yes")
+																<input type="radio" name="autofetch" id="autofetch1" value="1" onclick="$('#maxautofetchdiv').show('slow');" />
+															</label>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxautofetchdiv" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set4")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxautofetch" style="background-image:none;outline:none;"  >
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns" id="maxlastestpostsdiv" >
+														<div class="small-9 columns" >
+															<br>
+															__("Set5")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxlastestposts" style="background-image:none;outline:none;">
+																<option value="5">5</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set6")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxincncts" style="background-image:none;outline:none;" >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns">
+														<div class="small-9 columns" >
+															<br>
+															__("Set7")&nbsp;
+														</div>
+														<div class="small-3 columns" style="float:right;">
+															<select class="custom" id="maxknowns" style="background-image:none;outline:none;" >
+																<option value="0">0</option>
+																<option value="10">10</option>
+																<option value="20">20</option>
+																<option value="30">30</option>
+																<option value="40">40</option>
+																<option value="50">50</option>
+															</select>
+														</div>
+													</div>
+													<div class="small-12 columns" align="center" style="display:none;">
+														<br>
+														<button	id="submitConfig" onclick="UpdateConfig();"></button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div> 
+									<div class="content" id="AboutTab" style="padding:0;margin:0;"> 
+										<div class="small-12 columns" >
+											<div class="small-8 small-offset-2 columns">
+												<div class="row">
+													<div class="small=12 columns" align="center"><h4>__("About").</h4><h5 class="subheader">__("AbtPageVer"): 0.001: 0.01</h5><hr></div>
+													<div class="small-12 columns">
+														__("AboutI2PProjectText")
+														
+													</div>
+												</div>
+											</div>
+										</div>
+									</div> 
+								</div>
+							</div>
+						</section> 
+						<a class="exit-off-canvas" onclick="return true;"></a>
+					</div> 
+				</div>
+
+
+
+
+					
+					
+					
+					
+				<div id="infoPanel"  style="width:auto;"><div class="lead txt"></div></div>	
+				<div id="infoModal" class="small reveal-modal" style="width:auto;" data-reveal><div class="lead txt"></div><a class="close-reveal-modal">&#215;</a></div>	
+				<div id="peersPosts" class="reveal-modal" data-reveal >
+					<div class="small-12 columns" id="PeersPosts" style="height:300px;padding:0;">
+						<div id="PeersPostsapp" style="width:98%;height:300px;overflow-y:auto;overflow-x:hidden;display: inline-block;">
+							<section id="PeersPostsmain" >
+								<ul class="" id="PeersPosts-list" ></ul>
+							</section>
+						</div>
+					</div>
+					<a class="close-reveal-modal">&#215;</a>
+				</div>	
+				<div id="newPost" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns">
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("I2PMarkdownMan")</a><br><br>
+						<textarea id="new_post_text" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="newpost">__("PostIt")</button>
+					</div>
+					<a class="close-reveal-modal" id="close_newPost">&#215;</a>
+				</div>	
+				<div id="editPost" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("I2PMarkdownMan")</a><br><br>
+						<input type="hidden" id="editPostID" value="" />
+						<textarea id="edit_post_text" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="editpost">__("UpdatePost")</button>
+						<br>
+					</div>
+					<a class="close-reveal-modal" id="close_editPost">&#215;</a>
+				</div>
+				<div id="cmnt2mypostPost" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("I2PMarkdownMan")</a><br><br>
+						<input type="hidden" id="cmnt2mypostPostID" value="" />
+						<textarea id="cmnt2mypost_post_text" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmnt2mypost">__("PostIt")</button>
+						<br>
+					</div>
+					<a class="close-reveal-modal" id="close_cmnt2mypostPost">&#215;</a>
+				</div>
+				<div id="cmntPost" class="medium reveal-modal" data-reveal style="background:#eeeeee;padding:15px;/*width:615px;margin-left: -23%;*/">
+					<div class="small-12 columns" >
+						<h6><span style="color:#444;">__("AddComment"):</span></h6>
+						<a href="https://github.com/OlgaVlasova/markdown-doc/blob/master/README.md" target="_blank" >__("I2PMarkdownMan")</a><br><br>
+						<input type="hidden" id="cmntPostID" value="" />
+						<input type="hidden" id="cmntPostDest" value="" />
+						<textarea id="cmnt_post_text" style="min-height:100px;padding-top:10px"></textarea>
+						<br><button id="cmntpost">__("PostIt")</button>
+						<br>
+					</div>
+					<a class="close-reveal-modal" id="close_cmntPost">&#215;</a>
+				</div>
+				<div id="pickFile" class="reveal-modal small" data-reveal >
+					<div class="row">
+						<br>
+						<div class="small-12 columns panel" >
+							<input type="hidden" id="NickBox" />
+							<button	type='button' id='RefreshDirButton' class="small success button">__("UpdateLib")</button><br>
+							<div class='DirectoryArea'></div>
+						</div>
+					</div>
+					<!--<div class="row">
+						<div class="small-12 columns panel"  id="UPLOAD">
+							<div id="UploadBox">
+								<h6  style="margin:0px;"><b>Загрузка файлов в Вашу локальную библиотеку</b></h6>
+								<br>
+								<span id='UploadArea'>
+									<label for="FileBox">Выберите файл: </label><input type="file" class="success button" id="FileBox"><br>
+									<label for="NameBox">Переименуйте файл (<small>допустимы только латинские буквы и цифры</small>): </label><input type="text" id="NameBox" ><br>
+									<button	type='button' id='UploadButton' class='Button'>Залить</button>
+								</span>
+							</div>
+						</div>
+					</div>-->
+					<a class="close-reveal-modal" id="close_PickFile">&#215;</a>
+				</div>
+				
+				<div id="pickFileNewPost" class="reveal-modal small" data-reveal >
+					<div class="row">
+						<br>
+						<div class="small-12 columns panel" >
+							<input type="hidden" id="NickBoxNewPost" />
+							<button	type='button' id='RefreshDirButtonNewPost' class="small success button">__("UpdateLib")</button><br>
+							<div class='DirectoryAreaNewPost'></div>
+						</div>
+					</div>
+					<a class="close-reveal-modal" id="close_PickFileNewPost">&#215;</a>
+				</div>
+				
+			
+			
+			
+			</div>
+			
+		</div>
+				
+		<nav id="qweqwe">
+			<!--<span id="bb-nav-prev">&larr;</span>
+			<span id="bb-nav-next">&rarr;</span>-->
+			<!--<span id="bb-nav-prev">публично</span>-->
+		</nav>
+		<span id="tblcontents" class="menu-button"></span>
+	</div>
+
+	
+	
+	
+</div>	
+
+
+
+
+<script src="assets/js/json2.js"></script>
+<script src="assets/js/jquery.js"></script>
+<!--<script src="assets/foundation/js/vendor/jquery.js"></script>-->
+<script src="assets/jquery-ui/jquery-ui.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>-->
+
+
+<script src="assets/foundation/js/foundation.min.js"></script>
+<script src="assets/js/underscore.js"></script>
+<script src="assets/js/backbone.js"></script>
+
+<script src="assets/FullScreenBookBlock/js/jquery.mousewheel.js"></script>
+<script src="assets/FullScreenBookBlock/js/jquery.jscrollpane.min.js"></script>
+<script src="assets/FullScreenBookBlock/js/jquerypp.custom.js"></script>
+<script src="assets/FullScreenBookBlock/js/jquery.bookblock.js"></script>
+
+<!--<script src="assets/epiceditor/js/epiceditor.js"></script>-->
+<!--<script src="assets/js/rangy-core.js"></script>
+<script src="assets/js/hallo.js"></script>-->
+<script src="assets/js/showdown.js"></script>
+<script src="assets/js/to-markdown.js"></script>
+<script type="text/javascript" src="assets/markitup/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="assets/markitup/markitup/sets/markdown/set.js"></script>
+
+
+
+<script src="assets/FullScreenBookBlock/js/page.js"></script>
+
+
+<!--<script src="bb/main.js"></script>-->
+<script>
+$(function() {
+	Page.init();
+});
+</script>
+
+
+
+
+
+
+
+
+  <!-- Templates -->
+
+<script type="text/template" id="LogLine-template">
+	<div class="view" style="max-width:100%;word-wrap: break-word;">
+		<label>## <%- ts %> <%- title %></label>
+	</div>
+</script>
+<script type="text/template" id="ChatMsg-template">
+	<div class="view" style="max-width:100%;word-wrap: break-word;">
+		<div class="<% if(nick!="Me")print("red"); else print("blue"); %>" > <% var tts=new Date(ts);print(tts.toLocaleTimeString()); %> <%- nick %>: 
+		<%
+			var myr=/\[.*\]/gmi;
+			var match=myr.exec(txt.replace('\n',''));
+			if(match){
+				var link=match[0].toString().substr(1,match[0].toString().length-2);
+				var fnwoext=link.split("@")[0].split(".")[0];
+				txt=txt.replace(match[0].toString(),"<a href='#' style='display:inline-block;margin-top:4px;' onclick='DownloadFromPeer(\"i2p\", \""+link+"\");'> __("link") </a><div id='drop"+fnwoext+"' style='display:innline-block;float:right;width:50%;height:20px;'><div id='percent' style='display: inline-block;position:relative;right:0%;bottom:3px;width:50px;'>0%</div><div class='progress small-9 secondary round' style='display: inline-flex;'> <div class='meter' style='width: 0%'></div>    </div></div>");
+			};
+			print(txt);
+		%>
+		</div>
+	</div>
+</script>
+	
+<script type="text/template" id="ChatPeer-template">
+	<% var tstr=Foundation.utils.random_str(6); %>
+	<a href="#" title="[<%- nick %>]                    <%- desc %>" data-destination="<%- destination %>" class="topdivchatpeer <%- _id %> <% if(typeof(active) != "undefined" && active==1){ %>success<% } else { %>secondary<% }; %> button split" style="max-width:280px;overflow-x: hidden;white-space:nowrap;text-overflow: ellipsis;padding-right: 4.001rem;padding-bottom: 8px;padding-top: 8px;padding-left: 10px;margin:0 0;"><div class="state<%= state %>  <%- destination %>" style="float:left;" title="<%- title %>"></div>&nbsp;<%- nick %>
+		<p class="newmsgcnt" style="margin:5px;font-size:.7rem">__("NewMsgsCnt"):<%- newmsgcnt %></p>
+		<span data-dropdown="drop2<% tstr %>" data-options="align:bottom" onclick="setTimeout(function() {$(document).foundation(); },10);"></span>
+	</a>
+	<ul id="drop2<% tstr %>" class="f-dropdown" data-dropdown-content >
+		<% if (typeof(banned) == "undefined" || banned<1){ %> 
+			<li><a href="#" class="red block" ><span class="genericon genericon-unapprove" title="__("block")" style="width:41px;height:34px;font-size:41px;"></span></a></li> 	
+		<% } else { %>
+			<li><a href="#" class="unblock" ><span class="genericon genericon-reply-alt" title="__("unblock")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } %>
+		
+		<% if (typeof(ifollow) == "undefined" || ifollow<1){ %> 
+			<li><a href="#" class="follow" ><span class="genericon genericon-show" title="__("follow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } else { %>
+			<li><a href="#" class="unfollow" ><span class="genericon genericon-hide" title="__("unfollow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } %>
+		
+		<li><a href="#" class="red close" ><span class="genericon genericon-close" title="__("closechat")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+	</ul>
+</script>
+	
+<script type="text/template" id="Known-template">
+	<% var tstr=Foundation.utils.random_str(6); %>
+	<span title="[<%- nick %>]                    <%- desc %>" class="i<%- ifollow %> me<%- followme %> b<%- banned %> secondary button split <%- cid %>" style="max-width:280px;overflow-x: hidden;white-space:nowrap;text-overflow: ellipsis;padding-right: 4.001rem;padding-bottom: 8px;padding-top: 8px;padding-left: 10px;margin:0 0;<% var filter=GetCurFilterPeers("i2p"); if( (filter==="i" && ifollow<1) || (filter==="me" && followme<1) || (filter==="b" && banned<1) )print("display:none"); %>"><div class="state<%= state %>" style="float:left;" title="<%- title %>"></div>&nbsp;<b data-destination="<%- destination %>" class="nick"><%- nick %></b><span data-dropdown="drop1<%- tstr %>" onclick="setTimeout(function() {$(document).foundation(); },10);" ></span></span>
+	<ul id="drop1<%- tstr %>" data-dropdown-content class="f-dropdown" >
+		<li><a href="#" class="b0 red block" style="padding: 0.2rem;<% if (typeof(banned) != "undefined" && banned<1){print("display:block;");}else{print("display:none;");} %>" ><span class="genericon genericon-unapprove" title="__("block")" style="width:41px;height:34px;font-size:41px;"></span></a></li> 	
+		<li><a href="#" class="b1 unblock" style="padding: 0.2rem;<% if (typeof(banned) != "undefined" && banned==1){print("display:block;");}else{print("display:none;");} %>"  ><span class="genericon genericon-reply-alt" title="__("unblock")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="r read"  style="padding: 0.2rem;" ><span class="genericon genericon-user" title="__("takealook")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="f0 follow" style="padding: 0.2rem;<% if (typeof(ifollow) != "undefined" && ifollow<1){print("display:block;");}else{print("display:none;");} %>"  ><span class="genericon genericon-show" title="__("follow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="f1 unfollow"  style="padding: 0.2rem;<% if (typeof(ifollow) != "undefined" && ifollow==1){print("display:block;");}else{print("display:none;");} %>" ><span class="genericon genericon-hide" title="__("unfollow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="c chat" style="<% if (typeof(followme) != "undefined" && followme==1){print("display:block;");}else{print("display:none;");} %>"><span class="genericon genericon-chat" title="__("startchat")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+	</ul>
+</script>
+	
+<script type="text/template" id="MyPost-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns" >
+			<%= txt %>
+			<p class="subheader" style="font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="red del" title="__("delete")"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+			<% if (/*lts > (Date.now()-1000*60*15)*/true){ %> 
+			<a href="#" class="edit" data-reveal-id="editPost" title="__("edit")" onclick="CreateEpicEdit('edit_post_text','<%- _id %>',-1,'<%= src.replace(/'/,'`') %>');">
+				<span class="genericon genericon-edit" style="width:auto;font-size:24px;"></span><br><br>
+			</a>
+			<% } %>
+			<a href="#" class="addcmnt" data-reveal-id="cmnt2mypostPost" title="__("addcoment")" onclick="CreateEpicEdit('cmnt2mypost_post_text','<%- _id %>',-1,'');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><%- cmnt.nick %> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+						<br><br><a href="#" class="red delcmnt" title="__("delcomment")" onclick="DelComment2mypost('i2p','<%- _id %>','<%- cmnt.lts %>');"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+	
+<script type="text/template" id="Alert-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="/*margin:10px;*/font-size:.8rem;"><b><%- nick %></b></p>
+			<%= txt %>
+			<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost" title="__("addcoment")" onclick="CreateEpicEdit('cmnt_post_text','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><%- cmnt.nick %> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="Post-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="/*margin:10px;*/font-size:.8rem;"><b><%- nick %></b></p>
+			<%= txt %>
+			<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost" title="__("addcoment")" onclick="CreateEpicEdit('cmnt_post_text','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><%- cmnt.nick %> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="PeersPost-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="/*margin:10px;*/font-size:.8rem;"><b><%- nick %></b></p>
+			<%= txt %>
+			
+			<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost" title="__("addcoment")" onclick="CreateEpicEdit('cmnt_post_text','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="pheader<%- _id %>" type="checkbox" >
+			<label for="pheader<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><%- cmnt.nick %> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+	
+<script type="text/template" id="MyProfile-template">
+    <div class="small-12 columns" >
+		<div class="small-6 small-offset-3 columns" id="public" >
+			<div class="row">
+					<div class="small=12 columns" align="center"><h4>__("PublicData")</h4><h5 class="subheader">__("I2PPublicDataWarn")</h5><hr></div>
+					<div class="small-6 columns">
+						<label>__("YourNick"):</label>
+						<input id="nick" type="text" placeholder="__("YourNick")" maxlength=20 style="width:100%;" value="<%- nick %>"></input>
+					</div>
+					<div class="small-6 columns">
+						<label>__("I2PYourMail"):</label>
+						<input id="mail" type="text" placeholder="__("I2PYourMailPH")" maxlength=300 value="<%- mail %>"></input>
+					</div>
+					<div class="small-12 columns">
+						<label>__("AbtYou"):</label>
+						<textarea id="desc" placeholder="__("AbtYouPH")" rows=4 style="width:100%;padding: 0.4em;"><%- desc %></textarea>
+					</div>
+			</div>
+		</div>
+		
+		<div class="small-12 columns" align="center">
+				<br><br>
+				<button	class='button' onclick="updateProfile('i2p');">__("Update")</button>
+		</div>
+	</div> 
+ </script>
+ 
+ 
+ 
+ 
+ 
+ 
+<script type="text/template" id="LogLine_P-template">
+	<div class="view" style="max-width:100%;word-wrap: break-word;">
+		<label>## <%- ts %> <%- title %></label>
+	</div>
+</script>
+	
+<script type="text/template" id="ChatMsg_P-template">
+	<div class="view" style="max-width:100%;word-wrap: break-word;">
+		<div class="<% if(nick!="Me")print("red"); else print("blue"); %>" > <% var tts=new Date(ts);print(tts.toLocaleTimeString()); %> <%- nick %>: 
+		<%
+			var myr=/\[.*\]/gmi;
+			var match=myr.exec(txt.replace('\n',''));
+			if(match){
+				var link=match[0].toString().substr(1,match[0].toString().length-2);
+				var fn=link.split("@")[0];
+				var fnwoext=link.split("@")[0].split(".")[0];
+				var old="<a href='#' data-dropdown='drop"+fnwoext+"' title="+fn+" onclick='DownloadFromPeer(\"th\", \""+link+"\");'> __("link") </a><div id='drop"+fnwoext+"' class='f-dropdown tiny content' data-dropdown-content ><p class='txt'></p></div>";
+				txt=txt.replace(match[0].toString(),"<a href='#' style='display:inline-block;margin-top:4px;'  title='"+fn+"' onclick='DownloadFromPeer(\"th\", \""+link+"\");'> __("link") </a><div id='drop"+fnwoext+"' style='display:innline-block;float:right;width:50%;height:20px;'><div id='percent' style='display: inline-block;position:relative;right:0%;bottom:3px;width:50px;'>0%</div><div class='progress small-9 secondary round' style='display: inline-flex;'> <div class='meter' style='width: 0%'></div>    </div></div>");
+			};
+			print(txt);
+		%>
+		</div>
+	</div>
+</script>
+	
+<script type="text/template" id="ChatPeer_P-template">
+	<% var tstr=Foundation.utils.random_str(6); %>
+	<a href="#" title="[<%- nick %>]                    <%- desc %>                   <%- destination %>" data-destination="<%- destination %>" class="topdivchatpeer_P <%- _id %> <% if(typeof(active) != "undefined" && active==1){ %>success<% } else { %>secondary<% }; %> button split" style="max-width:280px;overflow-x: hidden;white-space:nowrap;text-overflow: ellipsis;padding-right: 4.001rem;padding-bottom: 8px;padding-top: 8px;padding-left: 10px;margin:0 0;"><div class="state<%= state %>  <%- destination %>" style="float:left;" title="<%- title %>"></div>&nbsp;<%- nick %>
+		<p class="newmsgcnt" style="margin:5px;font-size:.7rem">__("NewMsgsCnt"):<%- newmsgcnt %></p>
+		<span data-dropdown="drop2<% tstr %>" data-options="align:bottom" onclick="setTimeout(function() {$(document).foundation(); },10);"></span>
+	</a>
+	<ul id="drop2<% tstr %>" class="f-dropdown" data-dropdown-content >
+		<% if (typeof(banned) == "undefined" || banned<1){ %> 
+			<li><a href="#" class="red block" ><span class="genericon genericon-unapprove" title="__("block")" style="width:41px;height:34px;font-size:41px;"></span></a></li> 	
+		<% } else { %>
+			<li><a href="#" class="unblock" ><span class="genericon genericon-reply-alt" title="__("unblock")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } %>
+		
+		<% if (typeof(ifollow) == "undefined" || ifollow<1){ %> 
+			<li><a href="#" class="follow" ><span class="genericon genericon-show" title="__("follow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } else { %>
+			<li><a href="#" class="unfollow" ><span class="genericon genericon-hide" title="__("unfollow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<% } %>
+		
+		<li><a href="#" class="red close" ><span class="genericon genericon-close" title="__("closechat")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		
+	</ul>
+</script>
+	
+	
+<script type="text/template" id="Known_P-template">
+	<% var tstr=Foundation.utils.random_str(6); %>
+	<span href="#" title="[<%- nick %>]                    <%- desc %>                    <%- destination %>" class="i<%- ifollow %> me<%- followme %> b<%- banned %> secondary button split <%- cid %>" style="max-width:280px;overflow-x: hidden;white-space:nowrap;text-overflow: ellipsis;padding-right: 4.001rem;padding-bottom: 8px;padding-top: 8px;padding-left: 10px;margin:0 0;<% var filter=GetCurFilterPeers("th"); if( (filter==="i" && ifollow<1) || (filter==="me" && followme<1) || (filter==="b" && banned<1) )print("display:none"); %>"><div class="state<%= state %>" style="float:left;" title="<%- title %>"></div>&nbsp;<b data-destination="<%- destination %>" class="nick_P"><%- nick %></b><span data-dropdown="drop1<%- tstr %>" onclick="setTimeout(function() {$(document).foundation(); },10);" ></span></span>
+	<ul id="drop1<%- tstr %>" data-dropdown-content class="f-dropdown" >
+		<li><a href="#" class="b0 red block" style="padding: 0.2rem;<% if (typeof(banned) != "undefined" && banned<1){print("display:block;");}else{print("display:none;");} %>" ><span class="genericon genericon-unapprove" title="__("block")" style="width:41px;height:34px;font-size:41px;"></span></a></li> 	
+		<li><a href="#" class="b1 unblock" style="padding: 0.2rem;<% if (typeof(banned) != "undefined" && banned==1){print("display:block;");}else{print("display:none;");} %>"  ><span class="genericon genericon-reply-alt" title="__("unblock")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="r read"  style="padding: 0.2rem;" ><span class="genericon genericon-user" title="подсмотреть" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="f0 follow" style="padding: 0.2rem;<% if (typeof(ifollow) != "undefined" && ifollow<1){print("display:block;");}else{print("display:none;");} %>"  ><span class="genericon genericon-show" title="__("follow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="f1 unfollow"  style="padding: 0.2rem;<% if (typeof(ifollow) != "undefined" && ifollow==1){print("display:block;");}else{print("display:none;");} %>" ><span class="genericon genericon-hide" title="__("unfollow")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+		<li><a href="#" class="c chat" style="<% if (typeof(followme) != "undefined" && followme==1){print("display:block;");}else{print("display:none;");} %>"><span class="genericon genericon-chat" title="__("startchat")" style="width:41px;height:34px;font-size:41px;"></span></a></li>
+	</ul>
+</script>
+
+<script type="text/template" id="Alert_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="/*margin:10px;*/font-size:.8rem;"><b title="<%= destination %>"><%- nick %></b></p>
+			<%= txt %>
+			<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost" title="__("addcoment")" onclick="th_CreateEpicEdit('cmnt_post_text','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+	
+<script type="text/template" id="MyPost_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<%= txt %>
+			<p class="subheader" style="margin:10px;font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="red del" title="__("delete")"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+			<% if (/*lts > (Date.now()-1000*60*15)*/true){ %> 
+			<a href="#" class="edit" data-reveal-id="editPost_P" title="__("edit")" onclick="CreateEpicEdit('edit_post_text_P','<%- _id %>',-1,'<%= src.replace(/'/,'`') %>');">
+				<span class="genericon genericon-edit" style="width:auto;font-size:24px;"></span><br><br>
+			</a>
+			<% } %>
+			<!--<a href="#" class="extlink"  title="__("getextlink")" onclick="$('#infoModal_P .txt').html('http://193.34.144.23:56765/?<%= destination %>/post/<%- _id %>');	$('#infoModal_P').foundation('reveal', 'open');">
+				<span class="genericon genericon-link" style="width:auto;font-size:24px;"></span><br><br>
+			</a>-->
+			<a href="#" class="addcmnt" data-reveal-id="cmnt2mypostPost_P" title="__("addcoment")" onclick="CreateEpicEdit('cmnt2mypost_post_text_P','<%- _id %>',-1,'');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+						<br><br><a href="#" class="red delcmnt" title="__("delcomment")" onclick="DelComment2mypost('th', '<%- _id %>','<%- cmnt.lts %>');"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/template" id="Post_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="margin:10px;font-size:.8rem;"><b title="<%= destination %>"><%- nick %></b></p>
+			<%= txt %>
+			<p class="subheader" style="margin:10px;font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost_P" title="__("addcoment")" onclick="CreateEpicEdit('cmnt_post_text_P','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns">
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="margin:10px;font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		<div>
+	</div>
+</script>
+
+<script type="text/template" id="PeersPost_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="margin:10px;font-size:.8rem;"><b title="<%= destination %>"><%- nick %></b></p>
+			<%= txt %>
+			<p class="subheader" style="margin:10px;font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPost_P" title="__("addcoment")" onclick="CreateEpicEdit('cmnt_post_text_P','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="pheader<%- _id %>" type="checkbox" >
+			<label for="pheader<%- _id %>"><% print(cmnts.length) %> __("pluralcomments")</label>
+			<div class="small-10 small-offset-2 columns">
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="margin:10px;font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		<div>
+	</div>
+</script>
+<!--
+<script type="text/template" id="MyWebPost_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="margin:10px;font-size:.8rem;"><b title="<%= destination %>"><%- nick %></b>
+				<% if(action==2){ %>
+					<a href="<%= fulladdr %>" target="_blank" style="float:right; width:50%;"><%= curhost %></a></p>
+				<% } %>
+				<% if(action==1){ %>
+					<a href="//<%= curhost %>" target="_blank" style="float:right; width:50%;"><%= curhost %></a></p>
+				<% } %>
+			<p style="margin:10px;font-size:.8rem;">
+				<small>Якорь:<br></small><% if (action==2){ %>
+										<img src="<%= fullanchor %>" /><br>
+									<% } %>
+									<% if(action==1){ %>
+										<%= fullanchor %><br>
+									<% } %>
+				<small>Пост:<br></small><%= data %>
+			</p>
+			<p class="subheader" style="margin:10px;font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="red del" title="удалить"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+			<% if (/*lts > (Date.now()-1000*60*15)*/true){ %> 
+			<a href="#" class="edit" data-reveal-id="editMyWepPost_P" title="редактировать" onclick="CreateEpicEdit('edit_mywebpost_text_P','<%- _id %>',-1,'<%= src %>');">
+				<span class="genericon genericon-edit" style="width:auto;font-size:24px;"></span><br><br>
+			</a>
+			<% } %>
+			<a href="#" class="addcmnt" data-reveal-id="cmnt2mywebpostPost_P" title="добавить коммент" onclick="CreateEpicEdit('cmnt2mywebpost_post_text_P','<%- _id %>',-1,'');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> комментариев</label>
+			<div class="small-10 small-offset-2 columns" >
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="/*margin:10px;*/font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+						<br><br><a href="#" class="red delcmnt" title="удалить коммент" onclick="DelComment2mywebpost_P('<%- _id %>','<%- cmnt.lts %>');"><span class="genericon genericon-trash" style="width:auto;font-size:24px;"></span></a><br><br>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</script>
+
+
+<script type="text/template" id="WebPost_P-template">
+	<div class="small-12 columns panel" style="word-wrap: break-word;padding:5px;min-width:203px;line-height:1rem;" >
+		<div class="small-11 columns">
+			<p style="margin:10px;font-size:.8rem;"><b title="<%= destination %>"><%- nick %></b>
+				<% if(action==2){ %>
+					<a href="<%= fulladdr %>" target="_blank" style="float:right; width:50%;"><%= curhost %></a></p>
+				<% } %>
+				<% if(action==1){ %>
+					<a href="//<%= curhost %>" target="_blank" style="float:right; width:50%;"><%= curhost %></a></p>
+				<% } %>
+			<p style="margin:10px;font-size:.8rem;">
+				<small>Якорь:<br></small><% if (action==2){ %>
+										<img src="<%= fullanchor %>" /><br>
+									<% } %>
+									<% if(action==1){ %>
+										<%= fullanchor %><br>
+									<% } %>
+				<small>Пост:<br></small><%= data %>
+			</p>
+			<p class="subheader" style="margin:10px;font-size:.8rem;"><% var tts=new Date(lts);print(tts.toLocaleString()); %></p>
+		</div>
+		<div class="small-1 column" align="right" style="padding-right:0;margin-right:0;margin-top:5px;">
+			<a href="#" class="addcmnt" data-reveal-id="cmntPostweb_P" title="добавить коммент" onclick="CreateEpicEdit('cmnt_webpost_text_P','<%- _id %>','<%- destination %>','');">
+				<span class="genericon genericon-comment" style="width:auto;font-size:24px;"></span>
+			</a>
+		</div>
+		<div  class="row" style="display: inline-block;float: right;">
+			<input class="toggle-box" id="header<%- _id %>" type="checkbox" >
+			<label for="header<%- _id %>"><% print(cmnts.length) %> комментариев</label>
+			<div class="small-10 small-offset-2 columns">
+				<% _.each(cmnts, function(cmnt) { %> 
+					<div class="small-11 columns">
+						<%= cmnt.txt %>
+						<p class="subheader" style="margin:10px;font-size:.8rem;"><b title="<%= cmnt.adestination %>"><%- cmnt.nick %></b> | <% var tts=new Date(cmnt.lts);print(tts.toLocaleString()); %></p>
+					</div>
+					<hr>
+				<% }); %>
+			</div>
+		<div>
+	</div>
+</script>
+-->
+
+	
+<script type="text/template" id="MyProfile_P-template">
+    <div class="small-12 columns" >
+		<div class="small-6 small-offset-3 columns" id="public_P" >
+			<div class="row">
+				<div class="small=12 columns" align="center"><h4>__("PublicData")</h4><h5 class="subheader">__("PublicDataWarn")</h5><hr><%- destination %><hr></div>
+				<div class="small-6 columns">
+					<label>__("YourNick"):</label>
+					<input id="nick_P" type="text" placeholder="__("YourNick")" maxlength=20 style="width:100%;" value="<%- nick %>"></input>
+				</div>
+				<div class="small-6 columns">
+					<label>__("YourMail"):</label>
+					<input id="mail_P" type="text" placeholder="__("YourMailPH")" maxlength=300 value="<%- mail %>"></input>
+				</div>
+				<div class="small-12 columns">
+					<label>__("AbtYou"):</label>
+					<textarea id="desc_P" placeholder="__("AbtYouPH")" rows=4 style="width:100%;padding: 0.4em;"><%- desc %></textarea>
+				</div>
+			</div>
+		</div>
+		
+		<div class="small-12 columns" align="center">
+				<br><br>
+				<button	class='button' onclick="updateProfile('th');">__("Update")</button>
+		</div>
+	</div> 
+</script>
+ 
+
+<script type="text/template" id="thing-template">
+    <div class="view" style="max-width:100%;word-wrap: break-word;">
+      <label><%- ts %> <%- title %></label>
+    </div>
+</script>
+ 
+  
+  
+ 
+</body>
+  
+
+    
+<script>
+
+$(document).foundation();
+
+var chat_notify = new Audio();
+chat_notify.setAttribute("src","assets/audio/vk2.wav");
+var msg_notify = new Audio();
+msg_notify.setAttribute("src","assets/audio/vk1.wav");
+//var call_notify = new Audio();
+//call_notify.setAttribute("src","assets/audio/call.wav");
+//call_notify.setAttribute("loop","loop");			
+				
+
+$("#main-section").bind("scroll",function(){UpdateBackToTop();});
+$("#main-section_P").bind("scroll",function(){UpdateBackToTop_P();});
+$(window).resize(function(){
+			updateLayout();
+});
+function reverseByLts(a, b) {
+  return a.lts < b.lts;
+}	
+
+
+function updateLayout(){
+	$("#ChatMsgs").css("height",$(window).height()-$("#chatmsginput").height()-120);
+	$("#ChatsPeers").css("max-height",$(window).height()-50);
+	$(".ChatMsgs-list").css("max-height",$(window).height()-$("#chatmsginput").height()-100);
+	$("#ChatMsgs_P").css("height",$(window).height()-$("#chatmsginput_P").height()-120);
+	$("#ChatsPeers_P").css("max-height",$(window).height()-50);
+	$(".ChatMsgs_P-list").css("max-height",$(window).height()-$("#chatmsginput_P").height()-100);
+	
+	$(".inner-wrap").css("height",$(window).height()-2);
+	$(".left-off-canvas-menu,.main-section").css("height",$(window).height());
+	
+	$("#main-section").css("max-height",$(window).height()-45);
+	$("#main-section").css("height","100%");
+	$("#main-section_P").css("max-height",$(window).height()-45);
+	$("#main-section_P").css("height","100%");
+	
+	//$("#Known-list").css("height",$(window).height()-$("#PeersFilter").height()-15);
+	//$("#Known-list_P").css("height",$(window).height()-$("#PeersFilter_P").height()-15);
+	
+};
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+    </script>
+  
+
+
+<!-- anonymous models -->
+<script src="bb/logs.js"></script>
+<script src="bb/profile.js"></script>
+<script src="bb/known.js"></script>
+<script src="bb/chatpeers.js"></script>
+<script src="bb/myposts.js"></script>
+<script src="bb/peersposts.js"></script><!-- last 5 posts -->
+<script src="bb/posts.js"></script><!-- all posts -->
+<script src="bb/alerts.js"></script><!-- alerts -->
+<!-- public models -->
+<!--<script src="assets/js/RTCMultiConnection.js"></script>-->
+<script src="bb/logs_p.js"></script>
+<script src="bb/profile_p.js"></script>
+<!--<script src="bb/callpeers_p.js"></script>-->
+<script src="bb/known_p.js"></script>
+<script src="bb/chatpeers_p.js"></script>
+<script src="bb/myposts_p.js"></script>
+<script src="bb/peersposts_p.js"></script><!-- last 5 posts -->
+<script src="bb/posts_p.js"></script><!-- all posts -->
+<script src="bb/alerts_p.js"></script><!-- alerts -->
+<!--<script src="bb/webposts_p.js"></script> wep_posts 
+<script src="bb/mywebposts_p.js"></script> mywep_posts 
+-->
+
+
+
+
+<script src="app.js"></script>
+
+
+
+
+
+<script type="text/javascript">
+
+window.addEventListener("load", Ready);
+window.addEventListener("load", Ready_P);
+//window.console.log=function(d){LogLines.add(new LogLine({"title":((typeof d === 'string')?(d):JSON.stringify(d))}));};
+//window.console.log=function(d){LogLines_P.add(new LogLine_P({"title":((typeof d === 'string')?(d):JSON.stringify(d))}));};
+</script>				
+</html>

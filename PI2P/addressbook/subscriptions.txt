@@ -1,0 +1,4 @@
+http://i2host.i2p/cgi-bin/i2hostetag
+http://i2p-projekt.i2p/hosts.txt
+http://no.i2p/export/alive-hosts.txt
+http://stats.i2p/cgi-bin/newhosts.txt
