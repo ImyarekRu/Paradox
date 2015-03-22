@@ -70,17 +70,18 @@ var serveroptions = {
 //var server = http.createServer(app).listen(SIO);
 //var sserver = https.createServer(serveroptions, app).listen(sSIO);console.log("Сервер запущен на порте "+sSIO);
 var sserver = https.createServer(serveroptions, function (request, response) {
-	request.url=request.url.toString().replace(/\?.*/,"");
+	//request.url=request.url.toString().replace(/\?.*/,"");
     var filePath = './public' + request.url;
 	if (filePath == './public/')
 		filePath = './public/index.html';
 	var extname = path.extname(filePath);
+	console.log(filePath, extname);
 	var fname=request.url.toString().substr(request.url.toString().lastIndexOf("/")+1);
-	/*var mimetype = mime.lookup(fname);
-	console.log("fname",fname);
-	console.log("mimetype",mimetype);*/
-	var contentType = 'text/html';
-	switch (extname) {
+	var mimetype = mime.lookup(extname);
+	//console.log("fname",fname);
+	console.log("mimetype",mimetype);
+	var contentType = mimetype;//'text/html';
+	/*switch (extname) {
 		case '.js':
 			contentType = 'text/javascript';
 			break;
@@ -90,10 +91,13 @@ var sserver = https.createServer(serveroptions, function (request, response) {
 		case '.woff':
 			contentType = 'application/font-woff';
 			break;
+		case '.ttf':
+			contentType = 'application/font-ttf';
+			break;
 		case '.wav':
 			contentType = 'audio/wav';//'audio/wav';
 			break;
-	}
+	}*/
 	
 	fs.exists(filePath, function(exists) {
 	
@@ -106,10 +110,12 @@ var sserver = https.createServer(serveroptions, function (request, response) {
 				else {
 					var locales =new locale.Locales(request.headers["accept-language"]);
 					response.writeHead(200, { 'Content-Type': contentType });
-					for(key in dicts[locales.best(supported)]){
-						rgxp=new RegExp('__\\("'+key+'"\\)','gmi');
-						content=content.toString().replace(rgxp,dicts[locales.best(supported).language][key]);
-					}
+					if(extname==".html" || extname==".js"){
+						for(key in dicts[locales.best(supported)]){
+							rgxp=new RegExp('__\\("'+key+'"\\)','gmi');
+							content=content.toString().replace(rgxp,dicts[locales.best(supported).language][key]);
+						}
+					};
 					bestlocale=locales.best(supported).language;
 					response.end(content, 'utf-8');
 				}
