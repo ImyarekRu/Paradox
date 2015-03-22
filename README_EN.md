@@ -39,6 +39,6 @@ You can find that app is using one Telehash seed for now. It is issue, I know. B
 For any questions email me - imyarek@i2pmail.org or find me on Twitter (@ImyarekRu) or Diaspora* (imyarek)
 
 
-###__Лицензия__
-MIT for my code. Licenses of embedded components their own.
+###__License__
+CopyLeft for my code. Licenses of embedded components their own.
 

@@ -822,12 +822,12 @@ function start_app(i2pp,thp,thcfgresp,i2pcfgresp)
 															null,
 															function(){
 																setTimeout(function(){
-																	Send2UI("i2p","keepinmind",{state:is_running,th_state:th_is_running});
+																	Send2UI("i2p","bootstraped",{});
 																	PollKnown("th");
 																},1000);
 															}
 														);
-													},20000)
+													},50000)
 													/*var tp=thp;
 													tp.destination=configs["th"].destination;
 													tp=CleanArray([tp]);

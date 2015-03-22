@@ -256,6 +256,11 @@ function ProcessCommand(context,data){
 								};
 								break;
 					
+		case 'bootstraped':
+								AddStartLink();AddStartLink_P();//////??? need to fix
+								$('#infoModal').foundation('reveal', 'close');
+								break;
+					
 		case 'updateImageInPage':	console.log("updateImageInPage");
 								console.log(data.msg.id);
 								console.log(data.msg.src);
