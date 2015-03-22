@@ -92,7 +92,7 @@
 "waitpleaseinit":		"Wait, please - initialization...",
 "waitpleaseinit1":		"Wait, please.<br>Initialization.",
 "profilesnotstarted":	"Your anon and public profiles<br>aren't runing now.",
-"profilesstartwarn":	"НЕ ЗАПУСКАЙТЕ ИХ ОДНОВРЕМЕННО!!!</b> -<br> это очень опасно...<br><br>Идеально - с разницей в несколько часов.",
+"profilesstartwarn":	"DO NOT RUN YOUR PROFILES TOGETHER!!!</b> -<br> it is very dangerous...<br><br>Ideally - start them with difference of some hours.",
 "starti2p":				"Start anon profile",
 "startth":				"Start public profile",
 "thstarted":			"Your public profile is runing.",
