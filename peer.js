@@ -739,7 +739,7 @@ function start_app(i2pp,thp,thcfgresp,i2pcfgresp)
 
 	console.log("start_app ",((!i2pcfgresp)?"null":""),((!thcfgresp)?"null":""));
 	//console.log(i2pp,thp,thcfgresp,i2pcfgresp);
-	setTimeout(function(){if (!sio.isConnected) {open("https://localhost:"+sSIO, "firefox");/*open("https://localhost:"+th_sSIO, "firefox");*/};},5000);
+	setTimeout(function(){if (!sio.isConnected) {open("https://localhost:"+11044, "firefox");/*open("https://localhost:"+th_sSIO, "firefox");*/};},5000);
 	if(UseI2P){
 		if(!i2pcfgresp && !thcfgresp)
 		{
@@ -3036,7 +3036,7 @@ function CallBobFor(action,args,cb){
 				if(stepout==9){
 					var tdest=strout.substring(3,strout.indexOf(newline));
 					console.log('destination: ' + tdest);
-					if(!defined(configs["i2p"]) || !defined(configs["i2p"].destination)){
+					if(!defined(configs["i2p"]) || configs["i2p"]==null || !defined(configs["i2p"].destination)){
 						global.configs["i2p"]=new Object();
 						configs["i2p"]={
 									destination:-1,
@@ -3098,6 +3098,13 @@ function CallBobFor(action,args,cb){
 	outclient.on('error', function(err) {
 		console.log("outclient.on error");
 		console.log(err);
+		setTimeout(CallBobFor(action,args,cb),5000);
+/*
+{ [Error: connect Unknown system errno 10056]
+  code: 'Unknown system errno 10056',
+  errno: 'Unknown system errno 10056',
+  syscall: 'connect' }
+*/
 	});
 };
 

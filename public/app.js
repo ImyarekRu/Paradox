@@ -90,7 +90,7 @@ function Ready_P(){
 	}
 	updateLayout();
 	$(document).foundation();
-	if(document.location.port==11044)document.location=document.location.toString().replace("11044","11045");
+	if(document.location.port==11044)document.location=document.location.toString().replace("11044","11043");
 	if(document.location.port==11045)document.location=document.location.toString().replace("11045","11043");
 
 	//$('#infoModal .txt').html("__("waitpleaseinit"");
