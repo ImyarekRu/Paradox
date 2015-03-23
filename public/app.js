@@ -124,7 +124,7 @@ $("#cmnt2mypost").click(function (e) {tempfunc3("i2p",e)});
 $("#cmnt2mypost_P").click(function (e) {tempfunc3("th",e)});
 function tempfunc3(context,e){
 	var P=(context=="th")?"_P":"";
-	var theContent = $('#cmnt2mypost_text'+P).get(0).value;//editor.exportFile();
+	var theContent = $('#cmnt2mypost_post_text'+P).get(0).value;//editor.exportFile();
 	NewComment2mypost(context,$('#cmnt2mypostPostID'+P).val(),theContent);//editor.importFile('tmp',"");
 	$('#close_cmnt2mypostPost'+P).click();
 };
@@ -139,7 +139,7 @@ function tempfunc4(context,e){
 };
 
 $("#cmnt2mywebpost_P").click(function (e) {
-	var theContent = $('#cmnt2mywebpost_post_text_text'+P).get(0).value;//editor.exportFile();
+	var theContent = $('#cmnt2mywebpost_post_text'+P).get(0).value;//editor.exportFile();
 	NewComment2mywebpost_P($('#cmnt2mywebpostPostID_P').val(),theContent);//editor.importFile('tmp',"");
 	$('#close_cmnt2mywebpostPost_P').click();
 });
