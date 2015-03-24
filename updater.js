@@ -69,6 +69,7 @@ rawgithub(url, function(err, data){
 				});
 				console.log("removing node_modules - too long paths");
 				rimraf.sync(path.resolve(tmp_path,"./"+reponame+"/node_modules"));
+				rimraf.sync(path.resolve(tmp_path,"./"+reponame+"/PI2P"));
 				 
 				console.log("now copying ver");
 				var res=fs.copySync(path.resolve(tmp_path,"./"+reponame+"/tmp/version/ver.json"), path.resolve(output_path,"./tmp/version/ver.json"));
