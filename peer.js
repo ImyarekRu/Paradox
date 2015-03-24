@@ -382,6 +382,7 @@ th_renderer.image = function (href, title, text) {
 			console.log("peerfn="+peerfn);
 			console.log("fext="+fext);
 			console.log("peerreq="+peerreq);
+			if(gth)
 			gth.thtp.request("thtp://"+peerreq,function(err,res){
 				if(err){
 					console.log("THTP IMG ERROR "+err.toString());
