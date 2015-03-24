@@ -122,5 +122,10 @@
 "ClearnetWarn":			"Warning! Clearnet!",
 "ClearnetImgWarn":		"Warning! Image from Clearnet!",
 "MayBeClearnetWarn":	"Warning! Link may be to Clearnet!",
-"MayBeClearnetImgWarn":	"Warning! Image may be from Clearnet!"
+"MayBeClearnetImgWarn":	"Warning! Image may be from Clearnet!",
+
+"checkUpdates":			"Check for updates",
+"noUpdates":			"No updates available.",
+"waitForUpdate":		"Updating is in progress. Wait for autorestart of the app, please."
+
 }

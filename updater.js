@@ -20,6 +20,14 @@ try{
 }catch(ex){
 	currentver = {app:"0.000"};
 };
+
+if(!fs.existsSync(path.resolve(__dirname, "./update.track")))
+{
+	var fd=fs.openSync(path.resolve(__dirname, "./update.track"),'w+', function(){;});
+	fs.closeSync(fd);
+}
+else fs.chmodSync(path.resolve(__dirname, "./update.track"), 0777);
+
 rawgithub(url, function(err, data){
     // => returns the file contents as a string
     if(err){console.log(err);console.log(url);process.exit(0);}
@@ -27,20 +35,24 @@ rawgithub(url, function(err, data){
     console.log("Local ver:"+currentver.app);
     rimraf.sync(path.resolve(tmp_path,"./"+reponame));
     if(fs.existsSync(path.resolve(__dirname,"./update.zip")))    fs.unlinkSync(path.resolve(__dirname,  "./update.zip"));
-    if(parseFloat(JSON.parse(data).app)==parseFloat(currentver.app))  process.exit(0);
+    if(parseFloat(JSON.parse(data).app)==parseFloat(currentver.app)) {
+		fs.writeFileSync(path.resolve(__dirname,"./update.track"),"updated");
+		process.exit(0);
+	}
     else
     {
         httpreq.download(
             urlzip,
             path.resolve(__dirname,"./update.zip")
         , function (err, progress){
-            if (err) return console.log(err);
-            console.log(progress);
+            fs.writeFileSync(path.resolve(__dirname,"./update.track"),"downloading");
+			if (err) return console.log(err);
+			console.log(progress);
         }, function (err, res){
             if (err) return console.log(err);
             console.log(res);
 
-            fs.createReadStream(path.resolve(__dirname + "/update.zip")).pipe(unzip.Extract({ path:tmp_path }))
+            fs.createReadStream(path.resolve(__dirname + "/update.track")).pipe(unzip.Extract({ path:tmp_path }))
             .on('finish', function () {
 				console.log('chmoding...');
 				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_macx32'));}catch(err){;};
@@ -70,7 +82,7 @@ rawgithub(url, function(err, data){
 				console.log("removing node_modules - too long paths");
 				rimraf.sync(path.resolve(tmp_path,"./"+reponame+"/node_modules"));
 				rimraf.sync(path.resolve(tmp_path,"./"+reponame+"/PI2P"));
-				 
+				fs.writeFileSync(path.resolve(__dirname,"./update.track"),"updated");
 				console.log("now copying ver");
 				var res=fs.copySync(path.resolve(tmp_path,"./"+reponame+"/tmp/version/ver.json"), path.resolve(output_path,"./tmp/version/ver.json"));
 				setTimeout(function(){console.log("Done! "+res);},5000);

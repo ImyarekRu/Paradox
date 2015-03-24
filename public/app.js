@@ -188,7 +188,7 @@ $("#SettingsTab_P input").bind("click",UpdateConfig_P);
 $("#CheckUpdates_P").click(function(){
 	var parent=document.getElementById("CheckUpdates_P").parentNode;
 	parent.removeChild(document.getElementById("CheckUpdates_P"));
-	parent.innerHTML="Выполняется проверка. После успешного обновления приложение автоматически перезапустится."
+	//parent.innerHTML="Выполняется проверка. После успешного обновления приложение автоматически перезапустится."
 	sendCmd("th","check4updates", {});
 });			
 
@@ -868,8 +868,18 @@ function ProcessCommand(context,data){
 								};
 								//$('#infoModal').foundation('reveal', 'close');
 								break;
+		case 'updateStatus':		
+								console.log(data);
+								var h;
+								if(data.status.toString().indexOf('pdated')>0)
+									h="<div style='width:100%;text-align:center;'>__("noUpdates")<br></div>";
+								else 
+									h="<div style='width:100%;text-align:center;'>__("waitForUpdate")<br></div>";
+								$('#infoModal .txt').html(h);
+								$('#infoModal').foundation('reveal', 'open');
+								break;
 		case 'qweqweqwe':		console.log(data);
-								my_profile.set(data.msg);
+								//my_profile.set(data.msg);
 								//$('#infoModal').foundation('reveal', 'close');
 								break;
 		default: console.log("unknown cmd");console.log(data);

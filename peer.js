@@ -4407,6 +4407,7 @@ function ProcessUICmd(src,data)
 							stdio: [ 'ignore', 'ignore','ignore',]
 						});
 					child.unref();
+					setTimeout(function(){Send2UI("th","updateStatus", { status : fs.readFileSync(path.resolve(__dirname,'./update.track')).toString()});},10000);
 					break;
 		default: console.log("Unknown cmd",src,data.cmd);break;
 	};
