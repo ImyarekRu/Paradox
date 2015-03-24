@@ -2,7 +2,7 @@
 // Used to run code in a directory and rerun it if any files are changed.
 // Usage: ./cli.js servercode.js
 // Where servercode.js is whatever js file you want node to run
-// *this file is modified specially for WebShadow
+// *this file is modified specially for Paradox
 
 // Excludes filetypes in the ignoreExtensions array
 var util = require('util')

@@ -185,7 +185,9 @@ $("#SettingsTab input").bind("click",UpdateConfig);
 $("#SettingsTab_P select").bind("change",UpdateConfig_P);
 $("#SettingsTab_P input").bind("click",UpdateConfig_P);
 
-			
+$("CheckUpdates_P").click(function(){
+	sendCmd("th","check4updates", {});
+});			
 
 
 			

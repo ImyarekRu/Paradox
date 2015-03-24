@@ -479,41 +479,6 @@ DUPSTREAM.prototype._write =
 	this.readArr.push(chunk);
     cb();
 };
-//////////////////////////////////////////////////////////////////
-//////////////////////// starting updater ////////////////////////
-/*var os = require('os'),
-	spawn = require('child_process').spawn,
-	nodebin="";
-  
-if(!isWin && !isMac)
-{
-	if(os.platform().match(/32/) || os.platform().match(/386/))	nodebin=path.resolve(__dirname, './node_x32');
-	else														nodebin=path.resolve(__dirname, './node_x64');
-}
-else if(!isWin)
-{
-	nodebin=path.resolve(__dirname, './node_macx32');
-}
-else
-{
-	nodebin=path.resolve(__dirname, './node_x32.exe');
-	//if(os.platform().match(/32/) || os.platform().match(/386/))	nodebin=path.resolve(__dirname, './node_x32.exe');
-	//else											nodebin=path.resolve(__dirname, './node_x64.exe');
-};
-var child=spawn(nodebin,[path.resolve(__dirname, './updater.js')],{
-		detached: true,
-		stdio: [ 'ignore', 'ignore','ignore',]
-	});
-	child.unref();
-setInterval(function(){
-	var child=spawn(nodebin,[path.resolve(__dirname, './updater.js')],{
-		detached: true,
-		stdio: [ 'ignore', 'ignore','ignore',]
-	});
-	child.unref();
-},1800000);*/
-////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -4409,6 +4374,31 @@ function ProcessUICmd(src,data)
 					break;
 		case "closecall":
 					SendData2Dest(src, data.data.destination,{cmd:"closecall"});
+					break;
+		case "check4updates":
+					var spawn = require('child_process').spawn,
+					nodebin="";
+				  
+					if(!isWin && !isMac)
+					{
+						if(os.platform().match(/32/) || os.platform().match(/386/))	nodebin=path.resolve(__dirname, './node_x32');
+						else														nodebin=path.resolve(__dirname, './node_x64');
+					}
+					else if(!isWin)
+					{
+						nodebin=path.resolve(__dirname, './node_macx32');
+					}
+					else
+					{
+						nodebin=path.resolve(__dirname, './node_x32.exe');
+						//if(os.platform().match(/32/) || os.platform().match(/386/))	nodebin=path.resolve(__dirname, './node_x32.exe');
+						//else											nodebin=path.resolve(__dirname, './node_x64.exe');
+					};
+					var child=spawn(nodebin,[path.resolve(__dirname, './updater.js')],{
+							detached: true,
+							stdio: [ 'ignore', 'ignore','ignore',]
+						});
+					child.unref();
 					break;
 		default: console.log("Unknown cmd",src,data.cmd);break;
 	};
