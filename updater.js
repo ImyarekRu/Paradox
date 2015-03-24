@@ -43,10 +43,10 @@ rawgithub(url, function(err, data){
             fs.createReadStream(path.resolve(__dirname + "/update.zip")).pipe(unzip.Extract({ path:tmp_path }))
             .on('finish', function () {
 				console.log('chmoding...');
-				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_macx32'));}catch(err){;};
-				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x32'));}catch(err){;};
-				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x32.exe'));}catch(err){;};
-				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x64'));}catch(err){;};
+				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_macx32'));}catch(err){;};
+				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_x32'));}catch(err){;};
+				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_x32.exe'));}catch(err){;};
+				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_x64'));}catch(err){;};
 				//try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x64.exe'));}catch(err){;};
 				//fs.chmodSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x32'), 0777);
 				//fs.chmodSync(path.resolve(tmp_path,"./"+reponame+"/components"+'/node_x64'), 0777);
@@ -71,7 +71,7 @@ rawgithub(url, function(err, data){
 				rimraf.sync(path.resolve(tmp_path,"./"+reponame+"/node_modules"));
 				 
 				console.log("now copying ver");
-				var res=fs.copySync(path.resolve(tmp_path,"./"+reponame+"/tmp/version/ver.json"), path.resolve(output_path,"./components/tmp/version/ver.json"));
+				var res=fs.copySync(path.resolve(tmp_path,"./"+reponame+"/tmp/version/ver.json"), path.resolve(output_path,"./tmp/version/ver.json"));
 				setTimeout(function(){console.log("Done! "+res);},5000);
 			});
 		});
