@@ -186,6 +186,9 @@ $("#SettingsTab_P select").bind("change",UpdateConfig_P);
 $("#SettingsTab_P input").bind("click",UpdateConfig_P);
 
 $("#CheckUpdates_P").click(function(){
+	var parent=document.getElementById("CheckUpdates_P").parentNode;
+	parent.removeChild(document.getElementById("CheckUpdates_P"));
+	parent.innerHTML="Выполняется проверка. После успешного обновления приложение автоматически перезапустится."
 	sendCmd("th","check4updates", {});
 });			
 

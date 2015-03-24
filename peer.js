@@ -26,6 +26,8 @@ var th_DBNAME=path.resolve(__dirname, "./PDX_FF/th_webshadow.db");
 var th_dbwNAME=path.resolve(__dirname, "./PDX_FF/th_webshadow_w.db");
 
 var GCHANNELNAME="WebShadow1";
+
+var currentver = require(path.resolve(__dirname,'./tmp/version/ver.json')).app;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var os = require('os'),
@@ -115,6 +117,10 @@ var sserver = https.createServer(serveroptions, function (request, response) {
 							rgxp=new RegExp('__\\("'+key+'"\\)','gmi');
 							content=content.toString().replace(rgxp,dicts[locales.best(supported).language][key]);
 						}
+					};
+					if(extname==".html"){
+						rgxp=new RegExp('__\\("currentver"\\)','gmi');
+						content=content.toString().replace(rgxp,currentver.toString());
 					};
 					bestlocale=locales.best(supported).language;
 					response.end(content, 'utf-8');
