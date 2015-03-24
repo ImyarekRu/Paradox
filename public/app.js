@@ -75,9 +75,9 @@ function Ready_P(){
 	console.log("window_P.load");
 	if(window.File && window.FileReader){ 
 		$("#UploadButton_P").click(StartUpload_P);  
-		//$("#UploadButtonW_P").click(StartUploadW_P);  
+		$("#UploadButtonW_P").click(StartUploadW_P);  
 		$("#RefreshDirButton_P").click(RefreshDirectory_P);  
-		//$("#RefreshDirButtonW_P").click(RefreshDirectoryW_P);  
+		$("#RefreshDirButtonW_P").click(RefreshDirectoryW_P);  
 		$("#RefreshDirButton2Tab_P").click(RefreshDirectory2Tab_P);  
 		$("#RefreshDirButtonNewPost_P").click(RefreshDirectoryNewPost_P);  
 		$("#FileBox_P").bind("change", FileChosen_P);
@@ -1099,14 +1099,14 @@ function StartUpload_P(){
 		alert("__("need2checklatnum")");
 	}
 }
-/*
+
 function StartUploadW_P(){
 	var filename=document.getElementById('NameBoxW_P').value;
 	if(filename.length >= 3 && filename.length <= 20 && onlylatnum.test(filename))
 	{
 		FReader_P = new FileReader();
 		Name_P = document.getElementById('NameBoxW_P').value;
-		var Content = "<span id='NameAreaW_P'>Загрузка " + SelectedFile_P.name + " как " + Name_P + "</span>";
+		var Content = "<span id='NameAreaW_P'>__("uploading") " + SelectedFile_P.name + " __("as") " + Name_P + "</span>";
 		Content += '<div id="ProgressContainer_P"><div id="ProgressBar_P"></div></div><span id="percent_P">50%</span>';
 		Content += "<span id='Uploaded_P'> - <span id='MB_P'>0</span>/" + Math.round(SelectedFile_P.size / 1048576) + "MB</span>";
 		document.getElementById('UploadAreaW_P').innerHTML = Content;
@@ -1117,18 +1117,18 @@ function StartUploadW_P(){
 	}
 	else if(filename.length < 3) 
 	{
-		alert("Необходимо выбрать файл ");
+		alert("__("need2selectfile") ");
 	}
 	else if(filename.length > 20) 
 	{
-		alert("Такое длинное имя файла может вызвать проблемы у пользователей Windows... Можете укоротить? ");
+		alert("__("toolongfilename") ");
 	}
 	else if(!onlylatnum.test(filename)) 
 	{
-		alert("Необходимо проверить, чтобы в имени файла были только цифры и латинские символы.");
+		alert("__("need2checklatnum")");
 	}
 }
-*/	
+	
 function RefreshDirectory(){			sendCmd("i2p", 'Dir', {})	};
 function RefreshDirectory2Tab(){		sendCmd("i2p", 'Dir2Tab', {})	};
 function RefreshDirectoryNewPost(){		sendCmd("i2p", 'DirNewPost', {})	};
@@ -1137,6 +1137,7 @@ function RefreshDirectoryW_P(){			sendCmd("th", 'DirW', {})	};
 function RefreshDirectory2Tab_P(){		sendCmd("th", 'Dir2Tab', {})	};
 function RefreshDirectoryNewPost_P(){	sendCmd("th", 'DirNewPost', {})	};
 function ShowLink(context, n){			sendCmd(context, 'GetLink', n);	};
+function ShowLinkW(context, n){			sendCmd(context, 'GetLinkW', n);	};
 function ShowLink2Tab(context, n){		sendCmd(context, 'GetLink2Tab', n);	};
 function ShowLinkNewPost(context, n){	sendCmd(context, 'GetLinkNewPost', n);	};
 function DelFile(context, n){			sendCmd(context, 'DelFile', n);	};
