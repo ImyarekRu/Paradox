@@ -6,7 +6,7 @@ var 	rawgithub = require('rawgithub'),
 	unzip = require("unzip");
 
 
-var user="ImyareRu";
+var user="ImyarekRu";
 var name="Paradox";
 var reponame=name+"-master";
 var urlzip="https://github.com/"+user+"/"+name+"/archive/master.zip";
