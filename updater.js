@@ -41,18 +41,18 @@ rawgithub(url, function(err, data){
 	}
     else
     {
+		fs.writeFileSync(path.resolve(__dirname,"./update.track"),"downloading");
         httpreq.download(
             urlzip,
             path.resolve(__dirname,"./update.zip")
         , function (err, progress){
-            fs.writeFileSync(path.resolve(__dirname,"./update.track"),"downloading");
-			if (err) return console.log(err);
+            if (err) return console.log(err);
 			console.log(progress);
         }, function (err, res){
             if (err) return console.log(err);
             console.log(res);
 
-            fs.createReadStream(path.resolve(__dirname + "/update.track")).pipe(unzip.Extract({ path:tmp_path }))
+            fs.createReadStream(path.resolve(__dirname + "/update.zip")).pipe(unzip.Extract({ path:tmp_path }))
             .on('finish', function () {
 				console.log('chmoding...');
 				try{ fs.unlinkSync(path.resolve(tmp_path,"./"+reponame+'/node_macx32'));}catch(err){;};
