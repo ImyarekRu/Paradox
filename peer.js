@@ -376,13 +376,6 @@ th_renderer.image = function (href, title, text) {
 	if(peerhn!=configs["th"].destination){
 		if(!fs.existsSync(path.resolve(__dirname, "./public/extimgs/"+peerhn+"/"+peerfn)))
 		{
-			if(!fs.existsSync(path.resolve(__dirname, "./public/extimgs/"+peerhn)))
-			{
-				fs.mkdirSync(path.resolve(__dirname, "./public/extimgs/"+peerhn));
-				fs.chmodSync(path.resolve(__dirname, "./public/extimgs/"+peerhn), 0777);
-			};
-			var fd = fs.openSync(path.resolve(__dirname, "./public/extimgs/"+peerhn+"/"+peerfn), 'w+', function(){;});
-			fs.closeSync(fd);
 			var peerreq=peerhn+/img/+peerfn;
 			console.log("peerhn="+peerhn);
 			console.log(configs["th"].destination);
@@ -402,6 +395,13 @@ th_renderer.image = function (href, title, text) {
 						var chunk;
 						while (null !== (chunk = res.read())) {	buf+=chunk;	};
 						if(buf.toString()=="ok"){
+							if(!fs.existsSync(path.resolve(__dirname, "./public/extimgs/"+peerhn)))
+							{
+								fs.mkdirSync(path.resolve(__dirname, "./public/extimgs/"+peerhn));
+								fs.chmodSync(path.resolve(__dirname, "./public/extimgs/"+peerhn), 0777);
+							};
+							var fd = fs.openSync(path.resolve(__dirname, "./public/extimgs/"+peerhn+"/"+peerfn), 'w+', function(){;});
+							fs.closeSync(fd);
 							
 							if(!defined(packetnum["th"][peerhn]))packetnum["th"][peerhn]=[];
 							packetnum["th"][peerhn][peerfn]=0;
@@ -2224,6 +2224,7 @@ function AppendSavingFileFromPeer2(context, data,len,destination){
 			duplex[context][Name].pipe(writable, { end: false });
 			writable.on("end", function() {
 				poll(th);
+				Send2UI(context, "ShowDownloadedImage",{'file':Name});
 			});
 			//fs.writeFileSync(path.resolve(__dirname,"./public/extimgs/"+destination+"/"+Name),);
 		};

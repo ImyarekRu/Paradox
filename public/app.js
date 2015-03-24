@@ -855,6 +855,19 @@ function ProcessCommand(context,data){
 												AddStartLink_P();
 											};*/
 					
+		case 'ShowDownloadedImage':		
+								var tfn=data['file'];
+								console.log(tfn);
+								var imgs=$("#PostsTab_P img");
+								for(i in imgs){
+									if(imgs[i].attr("src").toString().indexOf(tfn)>0){
+										var tsrc=imgs[i].attr("src");
+										imgs[i].src="";
+										imgs[i].src=tsrc;
+									}
+								};
+								//$('#infoModal').foundation('reveal', 'close');
+								break;
 		case 'qweqweqwe':		console.log(data);
 								my_profile.set(data.msg);
 								//$('#infoModal').foundation('reveal', 'close');
