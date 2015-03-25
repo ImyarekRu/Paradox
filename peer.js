@@ -1259,7 +1259,7 @@ function UpdatePostInMemory(cur,upd){
 		}
 		else
 		{
-			cur.push(el);
+			if(defined(el._id))	cur.push(el);
 		};
 	});
 	console.log(cur);
